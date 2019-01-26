@@ -1,0 +1,27 @@
+<resources>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">SmartManageRest</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="app_name">SmartManageRest</string>
+    <string name="designation_app">SmartManageRest</string>
+    <string name="designation_copyright">©Josamuna 2019</string>
+    <string name="designation_textSplash">Votre appui à la bonne gestion des matériels</string>
+    <string name="content_description_logo_splash">Icône de l\'application</string>
+    <string name="designation_message_login">Connection to database</string>
+    <string name="btn_exit_login">Exit</string>
+    <string name="btn_login">Login</string>
+    <string name="hint_username">Username</string>
+    <string name="hint_password">Password</string>
+    <string name="title_activity_main">Use SmartManageRest</string>
+    <string name="menu_capture">Capture</string>
+    <string name="menu_search">Search</string>
+    <string name="menu_History">History</string>
+    <string name="menu_About">About</string>
+    <string name="btn_make_capture">Capture QRCode</string>
+    <string name="designation_valeur_qrcode">Value QRCode captured</string>
+    <string name="btn_save_captured_qrcode">Save scanned code</string>
+    <string name="txt_hint_qrCode_captured">QrCode Has not been scanned !!</string>
+</resources>

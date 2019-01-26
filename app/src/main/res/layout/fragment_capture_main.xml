@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context=".fragment.FragmentCaptureMain"
+             android:background="@drawable/background3"
+             android:orientation="vertical">
+    <Button android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_capture"
+            android:layout_marginTop="80dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_centerHorizontal="true"
+            android:text="@string/btn_make_capture"
+            android:background="@drawable/background8"
+            android:textColor="@android:color/white"/>
+
+    <EditText android:layout_width="350dp"
+              android:layout_height="350dp"
+              android:id="@+id/qrCodeCaptured"
+              android:layout_marginTop="190dp"
+              android:layout_marginBottom="60dp"
+              android:layout_centerHorizontal="true"
+              android:scrollbars="vertical"
+              android:gravity="center"
+              android:textColor="@color/color_txt_qrcode_captured"
+              android:enabled="false"
+              android:inputType="textMultiLine"
+              android:textSize="@dimen/dim_qrcode_scaned"
+              android:hint="@string/txt_hint_qrCode_captured"
+              android:autofillHints="@string/txt_hint_qrCode_captured"
+              android:textAlignment="center"
+              tools:targetApi="o"/>
+
+    <Button android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_save_captured"
+            android:layout_marginTop="500dp"
+            android:layout_centerHorizontal="true"
+            android:textColor="@android:color/white"
+            android:text="@string/btn_save_captured_qrcode"
+            android:background="@drawable/background5"
+            />
+
+</LinearLayout>

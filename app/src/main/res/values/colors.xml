@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--<color name="colorPrimary">#008577</color>-->
+    <color name="colorPrimary">#b2d4f4</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#d81b60</color>
+    <color name="color_designation_app">#ffff00</color>
+    <color name="color_background_splash">#3c3f41</color>
+    <color name="color_designation_copyright">#e0ffff</color>
+    <color name="color_designation_textSplash">#fffafa</color>
+    <color name="color_designation_message_login">#0411c5</color>
+    <color name="color_backgroud_btn_exit_login">#f7d5d4</color>
+    <color name="color_backgroud_btn_login">#b2d4f4</color>
+    <color name="color_text_btn_exit_login">#af0641</color>
+    <color name="color_text_btn_login">#0c521a</color>
+    <color name="color_background_login">#ffffff</color>
+    <color name="color_background_App">#b2d4f4</color>
+    <color name="color_designation_app_drawer">#000000</color>
+    <color name="color_background_btn_captured_qrcode">#46D34D</color>
+    <color name="color_background_btn_make_capture">#76B7F1</color>
+    <color name="color_txt_qrcode_captured">#6D5700</color>
+    <!--<color name="color_background_login">#cddae2</color>-->
+</resources>

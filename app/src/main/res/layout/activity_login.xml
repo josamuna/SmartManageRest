@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.josamuna.smartmanagerest.LoginActivity"
+        android:background="@drawable/background1" android:orientation="vertical">
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/texLabelLogin"
+            android:textAlignment="center"
+            android:layout_marginTop="65dp"
+            android:text="@string/designation_message_login" android:gravity="center"
+            android:fontFamily="sans-serif-smallcaps" android:textSize="@dimen/dim_designation_message_login"
+            android:textColor="@color/color_designation_message_login"/>
+    <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/edtUserName"
+            android:layout_marginTop="110dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:hint="@string/hint_username" android:autofillHints=""
+            tools:targetApi="o"/>
+    <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:id="@+id/edtPassword"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:hint="@string/hint_password"
+            android:autofillHints="" tools:ignore="UnusedAttribute"/>
+    <GridLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginTop="110dp">
+        <Button
+                android:text="@string/btn_exit_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnExit"
+                android:layout_row="0"
+                android:layout_column="0"
+                android:layout_marginStart="30dp"
+                android:background="@drawable/background7"
+                android:layerType="software"
+                android:lineSpacingExtra="10sp" android:linksClickable="true" android:longClickable="true"
+                android:textColor="@color/color_text_btn_exit_login" style="@style/Widget.AppCompat.Button.Colored"
+                android:gravity="center"/>
+        <Button
+                android:text="@string/btn_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnLogin"
+                android:layout_row="0"
+                android:layout_column="3"
+                android:layout_marginEnd="30dp"
+                android:background="@drawable/background6"
+                android:textColor="@color/color_text_btn_login" style="@style/Widget.AppCompat.Light.ActionBar.TabBar"/>
+    </GridLayout>
+</LinearLayout>
