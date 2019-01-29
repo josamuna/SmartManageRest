@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.josamuna.smartmanagerest.R
+import com.josamuna.smartmanagerest.classes.Factory
 
 
 /**
@@ -22,5 +23,19 @@ class DefaultFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_default, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        //Set DefaultFragment value
+        Factory.FRAGMENT_VALUE_ID = 0
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        //Set DefaultFragment value
+        Factory.FRAGMENT_VALUE_ID = 0
     }
 }

@@ -7,70 +7,88 @@ import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import android.view.View
-import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
+import com.josamuna.smartmanagerest.classes.ApplicationPreferences
 import com.josamuna.smartmanagerest.classes.ConnectionClass
 import com.josamuna.smartmanagerest.classes.Factory
+import kotlinx.android.synthetic.main.activity_login.*
 import java.sql.SQLException
 import kotlin.system.exitProcess
 
 class LoginActivity : AppCompatActivity() {
 
-    private val database = "gestion_labo_DB"
-    private val server = "JOSAM"
+//    private val database = "gestion_labo_DB"
+//    private val server = "192.168.43.12"
     private var user = ""
-    private var passwod = ""
+    private var password = ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        val btnLogin = findViewById<View>(R.id.btnLogin) as Button
-        val btnCancel = findViewById<View>(R.id.btnExit) as Button
-        val txtUser = findViewById<View>(R.id.edtUserName) as EditText
-        val txtPwd = findViewById<View>(R.id.edtPassword) as EditText
+        ApplicationPreferences.init(applicationContext, "default_pref")
 
-        //Handle acton on button Login
-        btnLogin.setOnClickListener{
-            user = txtUser.text.toString()
-            passwod = txtPwd.text.toString()
+        //Verifie preferences
+        if(verifiePreferences()) {
 
-            val connect = ConnectionClass()
-            connect.serverName = server
-            connect.database = database
-            connect.userID = user
-            connect.password = passwod
+            //Handle acton on button Login
+            btnLogin.setOnClickListener {
+                user = edtUserName.text.toString()
+                password = edtPassword.text.toString()
 
-            //Execute connexion to DataBase
-            try {
-                if (callConnection(connect)) {
-                    val intent = Intent(applicationContext, MainActivity::class.java)
-                    startActivity(intent)
-                }
-            }catch (e : SQLException) {
-                Log.e("Error Connection", e.message)
-                Toast.makeText(applicationContext,"Enable to connect to Database,\nCheck username and password",
-                    Toast.LENGTH_LONG).show()
+                val connect = ConnectionClass()
+                connect.serverName = ApplicationPreferences.preferences.getString("server_pref", null)
+                connect.database = ApplicationPreferences.preferences.getString("database_pref", null)
+                connect.userID = user
+                connect.password = password
+
+                //Execute connexion to DataBase
+                try {
+                    if (callConnection(connect)) {
+                        //Open Main Activity
+                        val intent = Intent(applicationContext, MainActivity::class.java)
+                        startActivity(intent)
+                    }
+                } catch (e: SQLException) {
+                    Log.e("Error Connection", e.message)
+                    Toast.makeText(
+                        applicationContext, "Unable to connect to Database,\nCheck username and password",
+                        Toast.LENGTH_LONG
+                    ).show()
 //                buildDialog(context, "Connection to Database",
 //                    "Enable to open connection to Database,\n " + e.message)
-            }catch (e : ClassNotFoundException) {
-                Log.e("Error Connection", e.message)
-                Toast.makeText(applicationContext,"Enable to connect to Database,\nDriver not found",
-                    Toast.LENGTH_LONG).show()
-            }catch (e : Exception) {
-                Log.e("Error", e.message)
-                Toast.makeText(applicationContext,"Enable to connect to Database,\n" + e.message,
-                    Toast.LENGTH_LONG).show()
+                } catch (e: ClassNotFoundException) {
+                    Log.e("Error Connection", e.message)
+                    Toast.makeText(
+                        applicationContext, "Unable to connect to Database,\nDriver not found",
+                        Toast.LENGTH_LONG
+                    ).show()
+                } catch (e: Exception) {
+                    Log.e("Error", e.message)
+                    Toast.makeText(
+                        applicationContext, "Unable to connect to Database,\n" + e.message,
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
             }
+        }else{
+            //Open Activity Preferences
+            val intent = Intent(applicationContext, DatabaseActivity::class.java)
+            startActivity(intent)
         }
 
         //Handle acton on button Exit
-        btnCancel.setOnClickListener{
+        btnExit.setOnClickListener{
             onBackPressed()
         }
+    }
+
+    fun verifiePreferences(): Boolean{
+        if(ApplicationPreferences.preferences.getString("database_pref", null).isNullOrEmpty() &&
+            ApplicationPreferences.preferences.getString("server_pref", null).isNullOrEmpty())
+            return false
+        return true
     }
 
     private var positiveButtonClic = { _: DialogInterface, _: Int ->
@@ -93,6 +111,14 @@ class LoginActivity : AppCompatActivity() {
     override fun onBackPressed() {
         moveTaskToBack(true)
         exitProcess(-1)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        //Clear text
+        edtUserName.setText("")
+        edtPassword.setText("")
+        edtUserName.isFocusable = true
     }
 
     private fun callConnection(connectionClass : ConnectionClass) : Boolean

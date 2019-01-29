@@ -3,12 +3,10 @@
 package com.josamuna.smartmanagerest.fragment
 
 import android.Manifest
-import android.app.Activity
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
-import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
@@ -18,6 +16,7 @@ import android.widget.Toast
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.Result
 import com.josamuna.smartmanagerest.R
+import com.josamuna.smartmanagerest.classes.Factory
 import com.josamuna.smartmanagerest.interfaces.ISharedFragment
 import kotlinx.android.synthetic.main.capture_layout.*
 import me.dm7.barcodescanner.zxing.ZXingScannerView
@@ -43,6 +42,9 @@ class FragmentCapture: Fragment(), ZXingScannerView.ResultHandler, ISharedFragme
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //Set FragmentCapture value
+        Factory.FRAGMENT_VALUE_ID = 2
+
         //Use this line to set parameters for QRCode Scanner
         setQrCodeScannerProperties()
     }
@@ -61,15 +63,18 @@ class FragmentCapture: Fragment(), ZXingScannerView.ResultHandler, ISharedFragme
     override fun onResume() {
         super.onResume()
 
+        //Set FragmentCapture value
+        Factory.FRAGMENT_VALUE_ID = 2
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ContextCompat.checkSelfPermission(requireContext().applicationContext, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                  ActivityCompat.requestPermissions(Activity(), arrayOf(Manifest.permission.CAMERA), myCameraRequestCode)
+            if (ContextCompat.checkSelfPermission(activity!!.applicationContext, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                this@FragmentCapture.requestPermissions(arrayOf(Manifest.permission.CAMERA), myCameraRequestCode)
                 return
             }
         }
 
         qrCodeScanner.startCamera()
-        qrCodeScanner.setResultHandler(this)
+        qrCodeScanner.setResultHandler(this@FragmentCapture)
     }
 
     //Stop QRCode scanner on when pause fragment
@@ -81,12 +86,17 @@ class FragmentCapture: Fragment(), ZXingScannerView.ResultHandler, ISharedFragme
     //Performed action after scanned QRCode and save result in Result object
     override fun handleResult(result: Result?) {
         if(result != null){
-            //Toast.makeText(context,result.text, Toast.LENGTH_LONG).show()
-
             //Allow to open a new Fragment to another
+
+//            var bundle = Bundle()
+//            bundle.putString("k1", result.text)
+//            val fragment = FragmentCaptureMain()
+//            fragment.arguments = bundle
+//            openFragment(fragment, R.id.framelayout)
+
             val fragment = FragmentCapture.newinstance(result.text)
             openFragment(fragment, R.id.framelayout)
-            resumeCamera()
+//            resumeCamera()
         }
     }
 
@@ -106,6 +116,7 @@ class FragmentCapture: Fragment(), ZXingScannerView.ResultHandler, ISharedFragme
     //Call when detach Fragment
     override fun onDetach() {
         super.onDetach()
+
         val fragmentCaptureMain = FragmentCaptureMain()
         openFragment(fragmentCaptureMain, R.id.framelayout)
 //        val intent = Intent(context, MainActivity::class.java)

@@ -1,6 +1,8 @@
 package com.josamuna.smartmanagerest
 
 import android.os.Bundle
+import android.support.annotation.AnimRes
+import android.support.annotation.IdRes
 import android.support.design.widget.NavigationView
 import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
@@ -8,6 +10,7 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import com.josamuna.smartmanagerest.classes.Factory
 import com.josamuna.smartmanagerest.fragment.DefaultFragment
 import com.josamuna.smartmanagerest.fragment.FragmentCaptureMain
 import com.josamuna.smartmanagerest.interfaces.ISharedFragment
@@ -39,7 +42,17 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
         } else {
-            super.onBackPressed()
+            when(Factory.FRAGMENT_VALUE_ID){
+                0 -> super.onBackPressed()
+                1,2 -> {
+                    replaceFragmentSafely(
+                        fragment = DefaultFragment(),
+                        tag = "DEFAULT_FRAGMENT",
+                        containerViewId = R.id.framelayout,
+                        allowStateLoss = true
+                    )
+                }
+            }
         }
     }
 
@@ -64,9 +77,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when (item.itemId) {
             R.id.nav_capture -> {
                 // Handle the camera action
-               // makeText(applicationContext,"Handle the camera action", LENGTH_LONG).show()
-                val fragmentCaptureMain = FragmentCaptureMain()
-                openFragment(fragmentCaptureMain, R.id.framelayout)
+//                makeText(applicationContext,"Handle the camera action", LENGTH_LONG).show()
+//                val fragmentCaptureMain = FragmentCaptureMain()
+//                openFragment(fragmentCaptureMain, R.id.framelayout)
+
+                replaceFragmentSafely(
+                    fragment = FragmentCaptureMain(),
+                    tag = "FRAGMENT_CAPTURE_MAIN",
+                    containerViewId = R.id.framelayout,
+                    allowStateLoss = true
+                )
             }
             R.id.nav_search -> {
 
@@ -85,6 +105,26 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun openFragment(fragment: Fragment, fragment_id: Int) {
         supportFragmentManager.beginTransaction().replace(fragment_id, fragment).commit()
+    }
+
+    //Safely open fragment
+    fun AppCompatActivity.replaceFragmentSafely(fragment: Fragment,
+                                                tag: String,
+                                                allowStateLoss: Boolean = false,
+                                                @IdRes containerViewId: Int,
+                                                @AnimRes enterAnimation: Int = 0,
+                                                @AnimRes exitAnimation: Int = 0,
+                                                @AnimRes popEnterAnimation: Int = 0,
+                                                @AnimRes popExitAnimation: Int = 0) {
+        val ft = supportFragmentManager
+            .beginTransaction()
+            .setCustomAnimations(enterAnimation, exitAnimation, popEnterAnimation, popExitAnimation)
+            .replace(containerViewId, fragment, tag)
+        if (!supportFragmentManager.isStateSaved) {
+            ft.commit()
+        } else if (allowStateLoss) {
+            ft.commitAllowingStateLoss()
+        }
     }
 
     //Another way to open Fragment

@@ -24,4 +24,11 @@
     <string name="designation_valeur_qrcode">Value QRCode captured</string>
     <string name="btn_save_captured_qrcode">Save scanned code</string>
     <string name="txt_hint_qrCode_captured">QrCode Has not been scanned !!</string>
+    <string name="hint_database_name">Database name</string>
+    <string name="hint_server_name">Server name or IP Address</string>
+    <string name="designation_database_preference">Database parameters</string>
+    <string name="btn_save_database_preference">Save parameters</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
