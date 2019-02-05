@@ -17,22 +17,20 @@ import kotlin.system.exitProcess
 
 class LoginActivity : AppCompatActivity() {
 
-//    private val database = "gestion_labo_DB"
-//    private val server = "192.168.43.12"
     private var user = ""
     private var password = ""
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        //Initialise preferences to default valueA
         ApplicationPreferences.init(applicationContext, "default_pref")
 
         //Verifie preferences
         if(verifiePreferences()) {
 
-            //Handle acton on button Login
+            //Handle acton on clic button Login
             btnLogin.setOnClickListener {
                 user = edtUserName.text.toString()
                 password = edtPassword.text.toString()
@@ -51,7 +49,7 @@ class LoginActivity : AppCompatActivity() {
                         startActivity(intent)
                     }
                 } catch (e: SQLException) {
-                    Log.e("Error Connection", e.message)
+                    Log.e("Error Connection", "Unable to connect to Database,\nCheck username and password ${e.message}")
                     Toast.makeText(
                         applicationContext, "Unable to connect to Database,\nCheck username and password",
                         Toast.LENGTH_LONG
@@ -59,15 +57,15 @@ class LoginActivity : AppCompatActivity() {
 //                buildDialog(context, "Connection to Database",
 //                    "Enable to open connection to Database,\n " + e.message)
                 } catch (e: ClassNotFoundException) {
-                    Log.e("Error Connection", e.message)
+                    Log.e("Error Connection", "Unable to connect to Database,\nDriver not found ${e.message}")
                     Toast.makeText(
                         applicationContext, "Unable to connect to Database,\nDriver not found",
                         Toast.LENGTH_LONG
                     ).show()
                 } catch (e: Exception) {
-                    Log.e("Error", e.message)
+                    Log.e("Error", "Unable to connect to Database,\n ${e.message}")
                     Toast.makeText(
-                        applicationContext, "Unable to connect to Database,\n" + e.message,
+                        applicationContext, "Unable to connect to Database,\n ${e.message}",
                         Toast.LENGTH_LONG
                     ).show()
                 }
@@ -77,14 +75,9 @@ class LoginActivity : AppCompatActivity() {
             val intent = Intent(applicationContext, DatabaseActivity::class.java)
             startActivity(intent)
         }
-
-        //Handle acton on button Exit
-        btnExit.setOnClickListener{
-            onBackPressed()
-        }
     }
 
-    fun verifiePreferences(): Boolean{
+    private fun verifiePreferences(): Boolean{
         if(ApplicationPreferences.preferences.getString("database_pref", null).isNullOrEmpty() &&
             ApplicationPreferences.preferences.getString("server_pref", null).isNullOrEmpty())
             return false
@@ -103,16 +96,17 @@ class LoginActivity : AppCompatActivity() {
         Toast.makeText(applicationContext, "No action", Toast.LENGTH_SHORT).show()
     }
 
-    fun exitLogin() {
-        //Close application
-        super.onBackPressed()
-    }
-
+    /**
+     * Perform action when clic on back Button : Exit application
+     */
     override fun onBackPressed() {
         moveTaskToBack(true)
         exitProcess(-1)
     }
 
+    /**
+     * Persorm Action on resume application
+     */
     override fun onResume() {
         super.onResume()
         //Clear text
@@ -121,10 +115,16 @@ class LoginActivity : AppCompatActivity() {
         edtUserName.isFocusable = true
     }
 
+    /**
+     * Execute connexion to DataBase when Connections Parameters are valides
+     */
     private fun callConnection(connectionClass : ConnectionClass) : Boolean
     {
         var isConnect = false
-        if (Factory.executeConnection(connectionClass) != null)
+        val connect = Factory.executeConnection(connectionClass)
+        Factory.CONN_VALUE = connect
+
+        if (connect != null)
             isConnect = true
         return isConnect
     }

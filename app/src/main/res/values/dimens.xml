@@ -9,6 +9,8 @@
     <dimen name="dim_designation_copyright">10sp</dimen>
     <dimen name="dim_designation_text_splash">16sp</dimen>
     <dimen name="dim_designation_message_login">27sp</dimen>
+    <dimen name="dim_designation_message_login_tablette">32sp</dimen>
     <dimen name="dim_designation_app_drawer">22sp</dimen>
     <dimen name="dim_qrcode_scaned">21sp</dimen>
+    <dimen name="text_margin">16dp</dimen>
 </resources>

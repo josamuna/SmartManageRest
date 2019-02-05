@@ -2,8 +2,7 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">SmartManageRest</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
+    <string name="nav_header_desc">SmartManageRest Navigation header</string>
     <string name="action_settings">Settings</string>
     <string name="app_name">SmartManageRest</string>
     <string name="designation_app">SmartManageRest</string>
@@ -28,6 +27,23 @@
     <string name="hint_server_name">Server name or IP Address</string>
     <string name="designation_database_preference">Database parameters</string>
     <string name="btn_save_database_preference">Save parameters</string>
+    <string name="description_img_login">Login image</string>
+    <string name="description_img_username_login">Username image</string>
+    <string name="description_img_password_login">Password image</string>
+    <string name="description_img_database">Database image</string>
+    <string name="description_img_ip_address">IP Address image</string>
+    <string name="description_img_database_params">Username image</string>
+    <string name="description_img_qrcode_capture">QrCode image</string>
+    <string name="description_img_qrcode_validate_search">Search value captured</string>
+    <string name="description_img_default_fragment">Home image</string>
+    <string name="hint_txt_qrcode_validate_search">Search value captured</string>
+    <string name="designation_qrcode_capture">View Captured QrCode</string>
+    <string name="btn_validate_search_captured_qrcode">Search value into database</string>
+
+    <!-- Fragment Title-->
+    <string name="title_default_fragment">SmartManageRest-Home</string>
+    <string name="title_fragment_capture_main">SmartManageRest-Capture</string>
+    <string name="title_fragment_capture_qrcode">SmartManageRest-QrCode Capture</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

@@ -14,10 +14,11 @@ class DatabaseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_database)
 
+        //Save Database preferences (Server Name or IP Address and Database Name)
         btn_save_database_params.setOnClickListener {
             if(edtDatabaseName.text.isNullOrEmpty() ||
                     edtServerName.text.isNullOrEmpty()){
-                Toast.makeText(applicationContext, "Please set valide Database name and Server Name (IP Address) !!!",
+                Toast.makeText(applicationContext, "Please set a valide Database name and Server Name (IP Address) !!!",
                     Toast.LENGTH_LONG).show()
             }else{
                 ApplicationPreferences.preferences.edit().putString("database_pref", edtDatabaseName.text.toString()).apply()
@@ -29,6 +30,9 @@ class DatabaseActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Perform Action when press Back Button : Quit Application
+     */
     override fun onBackPressed() {
         moveTaskToBack(true)
         exitProcess(-1)

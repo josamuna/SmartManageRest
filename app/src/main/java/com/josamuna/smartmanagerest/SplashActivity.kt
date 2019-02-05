@@ -11,10 +11,11 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
-        object:CountDownTimer(3000,1000){//(8000,1000){
+        //Using a CountDownTimer to wait few second after open Login Activity
+        object:CountDownTimer(8000,1000){//(8000,1000){
             override fun onFinish() {
                 //Call LoginActivity
-                val intent = Intent(applicationContext,LoginActivity::class.java)
+                val intent = Intent(applicationContext, LoginActivity::class.java)
                 startActivity(intent)
             }
 

@@ -14,4 +14,18 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
+    <!--Customise toolbar title apparence-->
+    <style name="CustomToolbarTitleTheme" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">17sp</item>
+        <item name="android:textColor">@color/color_white</item>
+        <item name="android:fontFamily">@font/mystery_quest</item>
+    </style>
+
+    <!--Custome subtitle toolbar apparence-->
+    <style name="CustomToolbarSubTitleTheme" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/color_white</item>
+        <item name="android:fontFamily">@font/mystery_quest</item>
+    </style>
+
 </resources>

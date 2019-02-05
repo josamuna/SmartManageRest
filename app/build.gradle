@@ -29,6 +29,7 @@ dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     implementation 'com.android.support:design:27.1.1'
     implementation 'com.android.support:support-v4:27.1.1'
+    implementation 'com.android.support:recyclerview-v7:27.1.1'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
@@ -38,8 +39,10 @@ dependencies {
     implementation 'net.sourceforge.jtds:jtds:1.2.7'
     //Enable Serialization using JSON
     implementation 'com.google.code.gson:gson:2.8.5'
-    //implementation 'com.android.support:recyclerview-v7:27.1.1' to be add next time
+    implementation 'com.android.support:recyclerview-v7:27.1.1'
     //implementation files('libs/jtds-1.2.7.jar')
     //Using for supporting ViewModelProviders
     implementation 'android.arch.lifecycle:extensions:1.1.1'
+    //Supporting CardView
+    implementation 'com.android.support:cardview-v7:27.1.1'
 }
