@@ -1,5 +1,6 @@
 package com.josamuna.smartmanagerest
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.annotation.AnimRes
 import android.support.annotation.IdRes
@@ -8,15 +9,13 @@ import android.support.v4.app.Fragment
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import com.josamuna.smartmanagerest.classes.Factory
-import com.josamuna.smartmanagerest.fragment.DefaultFragment
-import com.josamuna.smartmanagerest.fragment.FragmentCaptureMain
+import com.josamuna.smartmanagerest.enumerations.FragmentTagValue
+import com.josamuna.smartmanagerest.fragment.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
-import java.lang.Exception
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -45,9 +44,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
         } else {
-            when(Factory.FRAGMENT_VALUE_ID){
-                0 -> super.onBackPressed()
-                1,2 -> {
+            when(Factory.FRAGMENT_VALUE_TAG){
+                //If the main fragment is open, back to Login Activity
+                FragmentTagValue.Default ->{
+                    val intent = Intent(applicationContext, LoginActivity::class.java)
+                    startActivity(intent)
+                }
+                    //super.onBackPressed()
+                FragmentTagValue.CaptureMain,FragmentTagValue.Capture, FragmentTagValue.About, FragmentTagValue.Search, FragmentTagValue.ListQrCode -> {
                     replaceFragmentSafely(
                         fragment = DefaultFragment(),
                         tag = "DEFAULT_FRAGMENT",
@@ -96,30 +100,33 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 )
             }
             R.id.nav_search -> {
-
+                replaceFragmentSafely(
+                    fragment = FragmentSearch(),
+                    tag = "FRAGMENT_SEARCH",
+                    containerViewId = R.id.framelayout,
+                    allowStateLoss = true
+                )
             }
             R.id.nav_history -> {
-
+                replaceFragmentSafely(
+                    fragment = FragmentListSavedQrCode(),
+                    tag = "FRAGMENT_LIST_SAVED_QR_CODE",
+                    containerViewId = R.id.framelayout,
+                    allowStateLoss = true
+                )
             }
             R.id.nav_about -> {
-
+                replaceFragmentSafely(
+                    fragment = FragmentAbout(),
+                    tag = "FRAGMENT_ABOUT",
+                    containerViewId = R.id.framelayout,
+                    allowStateLoss = true
+                )
             }
         }
 
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
-    }
-
-    override fun onStop() {
-        super.onStop()
-
-        try {
-                Factory.closeConnection(Factory.CONN_VALUE)
-        }catch (e: IllegalArgumentException){
-            Log.e("Error", "Error when close connection ${e.message}")
-        }catch (e: Exception){
-            Log.e("Error", "Error not managed when close connection ${e.message}")
-        }
     }
 
     /**

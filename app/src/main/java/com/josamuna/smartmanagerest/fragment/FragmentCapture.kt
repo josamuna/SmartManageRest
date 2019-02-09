@@ -18,6 +18,7 @@ import com.google.zxing.Result
 import com.josamuna.smartmanagerest.R
 import com.josamuna.smartmanagerest.classes.Factory
 import com.josamuna.smartmanagerest.communicator.Communicator
+import com.josamuna.smartmanagerest.enumerations.FragmentTagValue
 import com.josamuna.smartmanagerest.interfaces.ISharedFragment
 import kotlinx.android.synthetic.main.capture_layout.*
 import me.dm7.barcodescanner.zxing.ZXingScannerView
@@ -40,7 +41,7 @@ class FragmentCapture: Fragment(), ZXingScannerView.ResultHandler, ISharedFragme
         supportAct.supportActionBar?.title = getString(R.string.title_fragment_capture_qrcode)
 
         //Set FragmentCapture value
-        Factory.FRAGMENT_VALUE_ID = 2
+        Factory.FRAGMENT_VALUE_TAG = FragmentTagValue.Capture
 
         //Instanciate model using with Communicator (ViewModel Class)
         model = ViewModelProviders.of(activity!!).get(Communicator::class.java)
@@ -66,7 +67,7 @@ class FragmentCapture: Fragment(), ZXingScannerView.ResultHandler, ISharedFragme
         super.onResume()
 
         //Set FragmentCapture value
-        Factory.FRAGMENT_VALUE_ID = 2
+        Factory.FRAGMENT_VALUE_TAG = FragmentTagValue.Capture
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(activity!!.applicationContext, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {

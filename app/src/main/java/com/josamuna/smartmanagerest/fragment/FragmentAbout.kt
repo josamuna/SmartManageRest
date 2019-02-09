@@ -16,14 +16,14 @@ import com.josamuna.smartmanagerest.enumerations.FragmentTagValue
  * A simple [Fragment] subclass.
  *
  */
-class DefaultFragment : Fragment() {
+class FragmentAbout : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_default, container, false)
+        return inflater.inflate(R.layout.fragment_about, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -31,16 +31,16 @@ class DefaultFragment : Fragment() {
 
         //Set Fragment Title
         val supportAct = activity as AppCompatActivity
-        supportAct.supportActionBar?.title = getString(R.string.title_default_fragment)
+        supportAct.supportActionBar?.title = getString(R.string.title_fragment_about)
 
         //Set DefaultFragment value
-        Factory.FRAGMENT_VALUE_TAG = FragmentTagValue.Default
+        Factory.FRAGMENT_VALUE_TAG = FragmentTagValue.About
     }
 
     override fun onResume() {
         super.onResume()
 
         //Set DefaultFragment value
-        Factory.FRAGMENT_VALUE_TAG = FragmentTagValue.Default
+        Factory.FRAGMENT_VALUE_TAG = FragmentTagValue.About
     }
 }

@@ -23,6 +23,7 @@
     <color name="color_background_header_main">#234D6E</color>
     <color name="color_background_app_main">#fcf5f5</color>
     <color name="color_background_text">#e4e4e4</color>
+    <color name="color_text_about">#4b3c3c</color>
     <color name="color_background_act">#6d8bcf</color>
     <color name="color_white">#ffffff</color>
     <color name="color_green_btn">#1ab322</color>
@@ -31,5 +32,9 @@
     <color name="color_tint_search">#f2f1e9</color>
     <color name="color_txt_search_qrcode_value">#63615d</color>
     <color name="color_transparent">#00ffffff</color>
-    <!--<color name="color_background_login">#cddae2</color> #46d34d-->
+    <color name="color_background_search">#f2f2f2</color>
+    <color name="color_tint_img_qrcode">#948775</color>
+    <color name="color_text_feaching">#74355a</color>
+    <color name="color_test">#948775</color>
+    <!--<color name="color_background_login">#cddae2</color> #46d34d  #9b8e7c-->
 </resources>

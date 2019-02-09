@@ -6,12 +6,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.widget.Toast
 import com.josamuna.smartmanagerest.classes.ApplicationPreferences
 import com.josamuna.smartmanagerest.classes.ConnectionClass
 import com.josamuna.smartmanagerest.classes.Factory
+import com.josamuna.smartmanagerest.enumerations.LogType
+import com.josamuna.smartmanagerest.enumerations.ToastType
 import kotlinx.android.synthetic.main.activity_login.*
+import java.sql.Connection
 import java.sql.SQLException
 import kotlin.system.exitProcess
 
@@ -49,25 +51,16 @@ class LoginActivity : AppCompatActivity() {
                         startActivity(intent)
                     }
                 } catch (e: SQLException) {
-                    Log.e("Error Connection", "Unable to connect to Database,\nCheck username and password ${e.message}")
-                    Toast.makeText(
-                        applicationContext, "Unable to connect to Database,\nCheck username and password",
-                        Toast.LENGTH_LONG
-                    ).show()
+                    Factory.makeLogMessage("Error Connection", "Unable to connect to Database,\nCheck username and password ${e.message}", LogType.Error)
+                    Factory.makeToastMessage(applicationContext,"Unable to connect to Database,\nCheck username and password", ToastType.Long)
 //                buildDialog(context, "Connection to Database",
 //                    "Enable to open connection to Database,\n " + e.message)
                 } catch (e: ClassNotFoundException) {
-                    Log.e("Error Connection", "Unable to connect to Database,\nDriver not found ${e.message}")
-                    Toast.makeText(
-                        applicationContext, "Unable to connect to Database,\nDriver not found",
-                        Toast.LENGTH_LONG
-                    ).show()
+                    Factory.makeLogMessage("Error Connection", "Unable to connect to Database,\nDriver not found ${e.message}", LogType.Error)
+                    Factory.makeToastMessage(applicationContext,"Unable to connect to Database,\nDriver not found", ToastType.Long)
                 } catch (e: Exception) {
-                    Log.e("Error", "Unable to connect to Database,\n ${e.message}")
-                    Toast.makeText(
-                        applicationContext, "Unable to connect to Database,\n ${e.message}",
-                        Toast.LENGTH_LONG
-                    ).show()
+                    Factory.makeLogMessage("Error", "Unable to connect to Database,\n ${e.message}", LogType.Error)
+                    Factory.makeToastMessage(applicationContext,"Unable to connect to Database,\n ${e.message}", ToastType.Long)
                 }
             }
         }else{
@@ -100,6 +93,14 @@ class LoginActivity : AppCompatActivity() {
      * Perform action when clic on back Button : Exit application
      */
     override fun onBackPressed() {
+        try {
+            Factory.closeConnection(Factory.CONN_VALUE)
+        }catch (e: IllegalArgumentException){
+            Factory.makeLogMessage("Error", "Error when close connection ${e.message}", LogType.Error)
+        }catch (e: Exception){
+            Factory.makeLogMessage("Error", "Error not managed when close connection ${e.message}", LogType.Error)
+        }
+
         moveTaskToBack(true)
         exitProcess(-1)
     }
@@ -121,11 +122,28 @@ class LoginActivity : AppCompatActivity() {
     private fun callConnection(connectionClass : ConnectionClass) : Boolean
     {
         var isConnect = false
-        val connect = Factory.executeConnection(connectionClass)
+        val connect: Connection? = Factory.executeConnection(connectionClass)
+
+//        if(Factory.CONN_VALUE != null) {
+//            Factory.CONN_VALUE?.close()
+//
+//            connect = Factory.executeConnection(connectionClass)
+//            Factory.CONN_VALUE = connect
+//
+//            if (connect != null)
+//                isConnect = true
+//        }else{
+//            connect = Factory.executeConnection(connectionClass)
+//            Factory.CONN_VALUE = connect
+//
+//            if (connect != null)
+//                isConnect = true
+//        }
         Factory.CONN_VALUE = connect
 
         if (connect != null)
             isConnect = true
+
         return isConnect
     }
 
@@ -137,5 +155,9 @@ class LoginActivity : AppCompatActivity() {
         builder.setNegativeButton(android.R.string.no, negativeButtonClic)
         builder.setNeutralButton("No action", neutralButtonClic)
         builder.show()
+    }
+
+    override fun onStop() {
+        super.onStop()
     }
 }

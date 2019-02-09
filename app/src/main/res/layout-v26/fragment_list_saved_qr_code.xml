@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context=".fragment.FragmentListSavedQrCode"
+        android:orientation="vertical"
+        android:background="@color/color_background_text">
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="62dp"
+            android:background="@drawable/ic_rounded_white1">
+
+        <SearchView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:queryHint="@string/hint_search"
+                android:iconifiedByDefault="false"
+                android:id="@+id/searchListQrCode"
+                android:background="@color/color_background_search" >
+
+        </SearchView>
+
+        <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/rvListQrCode"
+                android:layout_below="@+id/searchListQrCode"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:paddingBottom="5dp">
+
+        </android.support.v7.widget.RecyclerView>
+
+        <android.support.design.widget.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_add_qrcode"
+                android:layout_alignBottom="@+id/rvListQrCode"
+                android:layout_alignEnd="@+id/rvListQrCode"
+                android:layout_marginBottom="20dp"
+                android:layout_marginEnd="20dp"
+                app:srcCompat="@android:drawable/ic_input_add"
+                android:tint="@color/color_background_header_main"/>
+
+    </RelativeLayout>
+
+</android.support.design.widget.CoordinatorLayout>

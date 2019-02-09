@@ -79,7 +79,8 @@
                         android:paddingStart="10dp"
                         android:paddingEnd="0dp"
                         android:background="@color/color_background_text"
-                        android:hint="@string/hint_username"/>
+                        android:hint="@string/hint_username"
+                        tools:ignore="Autofill"/>
 
             </RelativeLayout>
 
@@ -112,7 +113,8 @@
                         android:paddingStart="10dp"
                         android:paddingEnd="0dp"
                         android:background="@color/color_background_text"
-                        android:hint="@string/hint_password"/>
+                        android:hint="@string/hint_password"
+                        tools:ignore="Autofill"/>
 
             </RelativeLayout>
 

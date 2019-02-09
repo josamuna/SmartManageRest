@@ -2,7 +2,6 @@ package com.josamuna.smartmanagerest.communicator
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
-import java.sql.Connection
 
 class Communicator : ViewModel() {
     val modelMessage = MutableLiveData<Any>()

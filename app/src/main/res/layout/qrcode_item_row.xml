@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="2dp"
+        android:layout_marginStart="0dp"
+        android:orientation="horizontal">
+
+    <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="0dp"
+            tools:ignore="UseCompoundDrawables">
+        <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:id="@+id/imgItemQrCode"
+                android:layout_marginTop="5dp"
+                android:layout_marginStart="0dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:contentDescription="@string/description_img_item_qrcode"
+                android:src="@drawable/ic_qrcode_liste_item"
+                android:tint="@color/color_tint_img_qrcode"/>
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtQrCodeContent"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"
+                android:paddingStart="0dp"
+                android:paddingEnd="2dp"
+                android:layout_gravity="center_vertical"
+                android:text="@string/designation_qrcode_capture"
+                android:textSize="19sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="2dp">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtDateSaved"
+                android:layout_marginBottom="10dp"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"
+                android:textSize="13sp"
+                android:layout_gravity="center_vertical"
+                android:text="@string/description_img_item_qrcode"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtTimeSaved"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"
+                android:textSize="13sp"
+                android:layout_gravity="center_vertical"
+                android:text="@string/description_img_item_qrcode"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>

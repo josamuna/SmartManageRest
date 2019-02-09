@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context=".fragment.FragmentAbout"
+        android:orientation="vertical"
+        android:background="@color/color_background_text">
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="47dp">
+
+        <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center_vertical"
+                android:background="@color/color_white"
+                app:cardCornerRadius="25dp"
+                app:cardElevation="10dp"
+                app:cardUseCompatPadding="true"
+                app:cardPreventCornerOverlap="false">
+
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/relative1"
+                    android:layout_marginTop="10dp"
+                    android:scrollbars="vertical"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp">
+                <ImageView
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:id="@+id/imgLogoAbout"
+                        android:contentDescription="@string/description_img_about"
+                        android:src="@drawable/logosmartmanage"
+                        android:layout_centerHorizontal="true"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"/>
+
+                <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/edtAboutContent"
+                        android:inputType="textMultiLine"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_below="@+id/imgLogoAbout"
+                        android:layout_above="@+id/btn_found_item"
+                        android:gravity="center"
+                        android:text="@string/about_string"
+                        android:textColor="@color/color_text_about"
+
+                        android:clickable="false"
+                        android:cursorVisible="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false">
+                </EditText>
+
+                <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/btn_send_comment"
+                        android:layout_alignParentBottom="true"
+                        android:text="@string/btn_validate_search_captured_qrcode"
+                        android:textColor="@color/color_white"
+                        android:background="@drawable/ic_btn_rounded2"/>
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+    </RelativeLayout>
+
+</android.support.design.widget.CoordinatorLayout>
