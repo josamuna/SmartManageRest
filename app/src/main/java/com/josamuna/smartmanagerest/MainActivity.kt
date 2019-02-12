@@ -51,10 +51,20 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     startActivity(intent)
                 }
                     //super.onBackPressed()
-                FragmentTagValue.CaptureMain,FragmentTagValue.Capture, FragmentTagValue.About, FragmentTagValue.Search, FragmentTagValue.ListQrCode -> {
+                FragmentTagValue.CaptureMain,FragmentTagValue.Capture, FragmentTagValue.About, FragmentTagValue.Help,
+                FragmentTagValue.ListQrCode -> {
                     replaceFragmentSafely(
                         fragment = DefaultFragment(),
                         tag = "DEFAULT_FRAGMENT",
+                        containerViewId = R.id.framelayout,
+                        allowStateLoss = true
+                    )
+                }
+
+                FragmentTagValue.Search, FragmentTagValue.ViewContentSelected ->{
+                    replaceFragmentSafely(
+                        fragment = FragmentListSavedQrCode(),
+                        tag = "FRAGMENT_LIST_SAVED_QRCODE",
                         containerViewId = R.id.framelayout,
                         allowStateLoss = true
                     )
@@ -80,7 +90,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
-            R.id.action_settings -> true
+            R.id.action_help -> {
+                replaceFragmentSafely(
+                    fragment = FragmentHelp(),
+                    tag = "FRAGMENT_HELP",
+                    containerViewId = R.id.framelayout,
+                    allowStateLoss = true
+                )
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }

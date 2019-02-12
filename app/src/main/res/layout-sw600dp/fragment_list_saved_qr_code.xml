@@ -12,10 +12,10 @@
     <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="62dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="72dp"
             android:background="@drawable/ic_rounded_white1">
 
         <SearchView
@@ -33,9 +33,9 @@
                 android:layout_height="match_parent"
                 android:id="@+id/rvListQrCode"
                 android:layout_below="@+id/searchListQrCode"
-                android:paddingStart="5dp"
-                android:paddingEnd="5dp"
-                android:paddingBottom="5dp">
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="10dp">
 
         </android.support.v7.widget.RecyclerView>
 
@@ -45,8 +45,8 @@
                 android:id="@+id/btn_add_qrcode"
                 android:layout_alignBottom="@+id/rvListQrCode"
                 android:layout_alignEnd="@+id/rvListQrCode"
-                android:layout_marginBottom="20dp"
-                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="40dp"
+                android:layout_marginEnd="40dp"
                 app:srcCompat="@android:drawable/ic_input_add"
                 android:tint="@color/color_white"/>
 

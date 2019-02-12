@@ -5,7 +5,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@color/color_background_text">
-
+    
     <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -14,12 +14,12 @@
             android:layout_marginTop="120dp"
             android:layout_marginRight="15dp">
         <ImageView
-                android:layout_width="280dp"
-                android:layout_height="280dp"
+                android:layout_width="360dp"
+                android:layout_height="360dp"
                 android:contentDescription="@string/description_img_default_fragment"
                 android:layout_centerHorizontal="true"
                 android:src="@drawable/ic_logosmartmanage1"
-                android:layout_marginTop="60dp"/>
+                android:layout_marginTop="230dp"/>
 
     </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>

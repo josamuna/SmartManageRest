@@ -4,7 +4,7 @@
     <color name="colorPrimary">#b2d4f4</color>
     <!--<color name="colorPrimaryDark">#00574B</color>-->
     <color name="colorPrimaryDark">#1a5b8e</color>
-    <color name="colorAccent">#d81b60</color>
+    <color name="colorAccent">#b71e43</color><!--#d81b60-->
     <color name="color_designation_app">#ffff00</color>
     <color name="color_background_splash">#3c3f41</color>
     <color name="color_designation_copyright">#e0ffff</color>
@@ -33,6 +33,7 @@
     <color name="color_txt_search_qrcode_value">#63615d</color>
     <color name="color_transparent">#00ffffff</color>
     <color name="color_background_search">#f2f2f2</color>
+    <color name="color_backgroud_ligth">#f9f7f7</color>
     <color name="color_tint_img_qrcode">#948775</color>
     <color name="color_text_feaching">#74355a</color>
     <color name="color_test">#948775</color>

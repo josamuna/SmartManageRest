@@ -2,30 +2,54 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-         Customize your theme here.
+        Customize your theme here.
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="actionOverflowMenuStyle">@style/OverflowMenuStyle</item>
+
+        <!--<item name="popupMenuStyle">@style/CustomContextMenu</item>-->
     </style>
+
+    <!--Style for popup menu in Toolbar-->
+    <style name="OverflowMenuStyle" parent="Widget.AppCompat.Light.PopupMenu.Overflow">
+        <item name="overlapAnchor">false</item>
+    </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
+    <!-- Style for Toolbar  Theme with Dark background-->
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
-    <!--Customise toolbar title apparence-->
+    <!--Customise toolbar title appearance-->
     <style name="CustomToolbarTitleTheme" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
         <item name="android:textSize">17sp</item>
         <item name="android:textColor">@color/color_white</item>
         <item name="android:fontFamily">@font/mystery_quest</item>
     </style>
 
-    <!--Custome subtitle toolbar apparence-->
+    <!--Custom subtitle Toolbar appearance-->
     <style name="CustomToolbarSubTitleTheme" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle">
         <item name="android:textSize">15sp</item>
         <item name="android:textColor">@color/color_white</item>
         <item name="android:fontFamily">@font/mystery_quest</item>
     </style>
+
+    <!--Custom context Menu appearance-->
+    <!--<style name="CustomContextMenu" parent="ThemeOverlay.AppCompat.Dark.ActionBar">-->
+    <!--<item name="android:textColor">@color/color_green_btn</item>-->
+    <!--<item name="android:itemBackground">@color/color_white</item>-->
+    <!--</style>-->
+
+    <!--<style name="CustomAlertDialog" parent="@android:style/Theme.Material.Dialog" tools:targetApi="lollipop">-->
+    <!--<item name="android:textColor">@android:color/white</item>-->
+    <!--<item name="android:textStyle">bold</item>-->
+    <!--<item name="android:headerDividersEnabled">true</item>-->
+    <!--<item name="android:background">@android:color/holo_blue_dark</item>-->
+    <!--</style>-->
 
 </resources>

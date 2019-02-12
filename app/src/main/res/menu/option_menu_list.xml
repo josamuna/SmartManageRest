@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+            android:id="@+id/menuView"
+            android:title="@string/menu_view_content"/>
+    <item
+            android:id="@+id/menuSearch"
+            android:title="@string/menu_select_search_value"/>
+    <item
+            android:id="@+id/menuCopy"
+            android:title="@string/menu_copy_content"/>
+    <item
+            android:id="@+id/menuDelete"
+            android:title="@string/menu_delete_content"/>
+    <item
+            android:id="@+id/menuDeleteAll"
+            android:title="@string/menu_delete_all_content"/>
+    <!--android:icon="@drawable/ic_popup_menu_view_data"-->
+    <!--android:icon="@drawable/ic_popup_menu_search"-->
+    <!--android:icon="@drawable/ic_popup_menu_copy_clipboard"-->
+    <!--android:icon="@drawable/ic_popup_menu_delete"-->
+</menu>

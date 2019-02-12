@@ -25,15 +25,15 @@
                 android:layout_height="match_parent">
 
             <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
                     android:id="@+id/imgDbParam"
                     android:contentDescription="@string/description_img_database_params"
                     android:src="@drawable/ic_img_database_params"
                     android:tint="@color/color_white"
                     android:background="@drawable/ic_btn_rounded2"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
                     android:layout_centerHorizontal="true"/>
 
             <TextView android:layout_width="match_parent"
@@ -54,12 +54,12 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/relative1"
                     android:layout_below="@+id/txtLabelDatabaseParams"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="25dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp">
 
-                <ImageView android:layout_width="40dp"
-                           android:layout_height="40dp"
+                <ImageView android:layout_width="50dp"
+                           android:layout_height="50dp"
                            android:id="@+id/imgDatabase"
                            android:contentDescription="@string/description_img_database"
                            android:src="@drawable/ic_img_database_name1"
@@ -85,13 +85,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/relative2"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="15dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_below="@+id/relative1">
 
-                <ImageView android:layout_width="40dp"
-                           android:layout_height="40dp"
+                <ImageView android:layout_width="50dp"
+                           android:layout_height="50dp"
                            android:id="@+id/imgIpAdress"
                            android:contentDescription="@string/description_img_database"
                            android:src="@drawable/ic_img_ip_address1"
@@ -117,10 +117,10 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/btn_save_database_params"
                     android:layout_below="@+id/relative2"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="15dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="20dp"
                     android:text="@string/btn_save_database_preference"
                     android:background="@drawable/ic_btn_rounded2"
                     android:textColor="@android:color/white"/>

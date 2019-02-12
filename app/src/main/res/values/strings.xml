@@ -3,7 +3,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">SmartManageRest</string>
     <string name="nav_header_desc">SmartManageRest Navigation header</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_help">Help</string>
     <string name="app_name">SmartManageRest</string>
     <string name="designation_app">SmartManageRest</string>
     <string name="designation_copyright">©Josamuna 2019</string>
@@ -44,22 +44,52 @@
     <string name="hint_result_qrcode_search">There is no value found</string>
     <string name="hint_search">Search here</string>
     <string name="about_string">About string</string>
-    <string name="bigString">Le droit du travail peut être défini comme étant un ensemble des règles qui s’appliquent aux relations individuelles et collectives à l’employeur et à l’employé tant individuellement que collectivement et découlant d’un contrat de travail.
-        Le contrat de travail est défini par l’article 7 point 3 de la Loi n°16/010 du 15 juillet 2016 modifiant et complétant la Loi n° 015-2002 portant Code du travail comme étant « toute convention, écrite ou verbale, par laquelle une personne, le travailleur, s’engage à fournir à une autre personne, l’employeur, un travail manuel ou autre sous la direction et l’autorité directe ou indirecte de celui-ci et moyennant rémunération ».
-        Le travailleur est toute personne physique en âge de contracter, quels que soient son sexe, son état civil et sa nationalité, qui s’est engagée à mettre son activité professionnelle, moyennant rémunération, sous la direction et l’autorité d’une personne physique ou morale, publique ou privée, dans les liens d’un contrat de travail.
-        L’employeur est toute personne, physique ou morale, de droit public ou privé, qui utilise les services d’un ou de plusieurs travailleurs en vertu d’un contrat de travail.
-        La sécurité sociale, selon la conception large formulée par le Bureau International du Travail (BIT), « est l’ensemble des institutions, mesures, droits et obligations dont l’objectif premier est de fournir ou de s’efforcer de fournir en fonction de règles spécifiques, une sécurité du revenu et des soins médicaux à chaque membre de la société ».
-        Dans le cadre de cet enseignement, compte tenu de son volume horaire, nous n’examinerons que la partie relative à la sécurité sociale des personnes vulnérables afin de vous doter des outils nécessaires vous permettant d’acquérir les notions essentielles en lien avec la défense des droits sociaux garantis aux personnes vulnérables en RDC : veuves, handicapées, enfants, etc.
+    <string name="bigString">Le droit du travail peut être défini comme étant un ensemble des règles qui s’appliquent
+        aux relations individuelles et collectives à l’employeur et à l’employé tant individuellement que collectivement
+        et découlant d’un contrat de travail.
+        Le contrat de travail est défini par l’article 7 point 3 de la Loi n°16/010 du 15 juillet 2016 modifiant et
+        complétant la Loi n° 015-2002 portant Code du travail comme étant « toute convention, écrite ou verbale, par
+        laquelle une personne, le travailleur, s’engage à fournir à une autre personne, l’employeur, un travail manuel
+        ou autre sous la direction et l’autorité directe ou indirecte de celui-ci et moyennant rémunération ».
+        Le travailleur est toute personne physique en âge de contracter, quels que soient son sexe, son état civil et sa
+        nationalité, qui s’est engagée à mettre son activité professionnelle, moyennant rémunération, sous la direction
+        et l’autorité d’une personne physique ou morale, publique ou privée, dans les liens d’un contrat de travail.
+        L’employeur est toute personne, physique ou morale, de droit public ou privé, qui utilise les services d’un ou
+        de plusieurs travailleurs en vertu d’un contrat de travail.
+        La sécurité sociale, selon la conception large formulée par le Bureau International du Travail (BIT), « est
+        l’ensemble des institutions, mesures, droits et obligations dont l’objectif premier est de fournir ou de
+        s’efforcer de fournir en fonction de règles spécifiques, une sécurité du revenu et des soins médicaux à chaque
+        membre de la société ».
+        Dans le cadre de cet enseignement, compte tenu de son volume horaire, nous n’examinerons que la partie relative
+        à la sécurité sociale des personnes vulnérables afin de vous doter des outils nécessaires vous permettant
+        d’acquérir les notions essentielles en lien avec la défense des droits sociaux garantis aux personnes
+        vulnérables en RDC : veuves, handicapées, enfants, etc.
     </string>
 
-    <!-- Fragment Title-->
-    <string name="title_default_fragment">SmartManageRest-Home</string>
-    <string name="title_fragment_capture_main">SmartManageRest-Capture</string>
-    <string name="title_fragment_capture_qrcode">SmartManageRest-QrCode Capture</string>
-    <string name="title_fragment_history">SmartManageRest-View QrCode Data</string>
-    <string name="title_fragment_about">SmartManageRest-About App</string>
-    <string name="title_fragment_search">SmartManageRest-Search</string>
+    <!--About String-->
+    <string name="str_title1">SmartManageRest</string>
+    <string name="str_title2">Copyright © <b>Josamuna 2019</b></string>
+    <string name="str_title3">To have more detail about this application, please contact me at this e-mail address <b><i>josamuna2009@gmail.com</i></b> </string>
+    <string name="str_title4"><u><i><b>Made by Ir. Isamuna Nkembo Josué</b></i></u></string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- Fragment Title-->
+    <string name="title_default_fragment">Home</string>
+    <string name="title_fragment_capture_main">Capture</string>
+    <string name="title_fragment_capture_qrcode">QrCode Capture</string>
+    <string name="title_fragment_history">View QrCode Data</string>
+    <string name="title_fragment_about">About Application</string>
+    <string name="title_fragment_search">Search into Database</string>
+    <string name="title_fragment_show_content">Show content selected</string>
+    <string name="title_fragment_help">Help</string>
+
+    <!-- Popup Menu List Items RecycleView-->
+    <string name="menu_view_content">Show content</string>
+    <string name="menu_select_search_value">Select for search</string>
+    <string name="menu_copy_content">Copy to clipboard</string>
+    <string name="menu_delete_content">Delete</string>
+    <string name="menu_delete_all_content">Delete all</string>
+    <string name="button_option_menu">&#8942;</string>
+
+    <!-- Title Menu Toolbar-->
+    <string name="str_menu_dropdown">Drop down Menu</string>
 </resources>

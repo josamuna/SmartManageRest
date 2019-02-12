@@ -1,5 +1,7 @@
 package com.josamuna.smartmanagerest.classes
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
 import android.os.StrictMode
 import android.support.v4.app.FragmentManager
@@ -19,6 +21,8 @@ object Factory {
     var CONN_VALUE : Connection? = null
     var TEXT_MESSAGE: String = ""
     var FRAGMENTMANAGER: FragmentManager? = null
+    var CLIPBOARDMANAGER: ClipboardManager? = null
+    var CLIPDATA: ClipData? = null
 
     fun executeConnection(connectionClass:ConnectionClass) : Connection?{
         val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()

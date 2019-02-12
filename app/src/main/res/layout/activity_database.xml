@@ -77,7 +77,8 @@
                           android:paddingStart="10dp"
                           android:paddingEnd="0dp"
                           android:hint="@string/hint_database_name"
-                          android:background="@color/color_background_text"/>
+                          android:background="@color/color_background_text"
+                          tools:ignore="Autofill"/>
             </RelativeLayout>
 
             <RelativeLayout
@@ -108,7 +109,8 @@
                           android:paddingStart="10dp"
                           android:paddingEnd="0dp"
                           android:hint="@string/hint_server_name"
-                          android:background="@color/color_background_text"/>
+                          android:background="@color/color_background_text"
+                          tools:ignore="Autofill"/>
             </RelativeLayout>
 
             <Button android:layout_width="match_parent"

@@ -13,8 +13,8 @@ import java.util.*
 class CustomQrCodeListAdapter(context: Context, qrObject: ArrayList<QrCodeData>): BaseAdapter() {
 
     //Local variables
-    var ctx = context
-    var codeQr = qrObject
+    private var ctx = context
+    private var codeQr = qrObject
 
     //Store array in temp Array to be use later
     private var tempArrayQr = ArrayList(codeQr)
@@ -28,6 +28,8 @@ class CustomQrCodeListAdapter(context: Context, qrObject: ArrayList<QrCodeData>)
             myview = myInflater!!.inflate(R.layout.qrcode_item_row, parent, false)
 
             holder = ViewHolder()
+
+            holder.txtId = myview.findViewById(R.id.txtIdSaved) as TextView
             holder.txtQr = myview.findViewById(R.id.txtQrCodeContent) as TextView
             holder.txtDate = myview.findViewById(R.id.txtDateSaved) as TextView
             holder.txtTime = myview.findViewById(R.id.txtTimeSaved) as TextView
@@ -38,7 +40,7 @@ class CustomQrCodeListAdapter(context: Context, qrObject: ArrayList<QrCodeData>)
         }
 
         val dataPosition = codeQr[position]
-
+        holder.txtId!!.text = dataPosition.intId.toString()
         holder.txtQr!!.text = dataPosition.qrcodeContent
         holder.txtDate!!.text = dataPosition.strDate
         holder.txtTime!!.text = dataPosition.strTime
@@ -59,13 +61,17 @@ class CustomQrCodeListAdapter(context: Context, qrObject: ArrayList<QrCodeData>)
     }
 
     class ViewHolder{
+        var txtId: TextView? = null
         var txtQr: TextView? = null
         var txtDate: TextView? = null
         var txtTime: TextView? = null
     }
 
+    /**
+     * Allow to perform quick search in a EditText
+     */
     fun filter(textFilter: String?){
-        val text = textFilter!!.toLowerCase(Locale.getDefault())
+        val text = textFilter!!.toLowerCase()
 
         codeQr.clear()
 
@@ -79,7 +85,7 @@ class CustomQrCodeListAdapter(context: Context, qrObject: ArrayList<QrCodeData>)
             }
         }
 
-        //Notify datachanged
+        //Notify data changed
         notifyDataSetChanged()
     }
 }

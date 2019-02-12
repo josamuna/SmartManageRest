@@ -1,5 +1,5 @@
 package com.josamuna.smartmanagerest.enumerations
 
 enum class FragmentTagValue {
-    Default, About, Capture, CaptureMain, ListQrCode, Search
+    Default, About, Capture, CaptureMain, ListQrCode, Search, ViewContentSelected, Help
 }

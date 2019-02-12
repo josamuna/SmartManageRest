@@ -13,7 +13,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_margin="15dp"
+            android:layout_margin="10dp"
             app:cardCornerRadius="30dp"
             app:cardElevation="15dp"
             app:cardPreventCornerOverlap="false"
@@ -24,15 +24,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-            <ImageView android:layout_width="160dp"
-                       android:layout_height="160dp"
+            <ImageView android:layout_width="120dp"
+                       android:layout_height="120dp"
                        android:id="@+id/imgLogin"
                        android:contentDescription="@string/description_img_login"
                        android:src="@drawable/ic_img_login"
                        android:background="@drawable/square1"
                        android:tint="@android:color/white"
-                       android:layout_marginTop="40dp"
-                       android:layout_marginBottom="50dp"
+                       android:layout_marginTop="20dp"
+                       android:layout_marginBottom="10dp"
                        android:layout_centerHorizontal="true"
                        android:padding="8dp"/>
 
@@ -55,12 +55,12 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/relative1"
                     android:layout_below="@+id/txtLabelLogin"
-                    android:layout_marginTop="120dp"
+                    android:layout_marginTop="20dp"
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="30dp">
 
-                <ImageView android:layout_width="60dp"
-                           android:layout_height="60dp"
+                <ImageView android:layout_width="50dp"
+                           android:layout_height="50dp"
                            android:id="@+id/imgUsername"
                            android:contentDescription="@string/description_img_username_login"
                            android:src="@drawable/ic_img_username"
@@ -88,13 +88,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/relative2"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="20dp"
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="30dp"
                     android:layout_below="@+id/relative1">
 
-                <ImageView android:layout_width="60dp"
-                           android:layout_height="60dp"
+                <ImageView android:layout_width="50dp"
+                           android:layout_height="50dp"
                            android:id="@+id/imgPassword"
                            android:contentDescription="@string/description_img_password_login"
                            android:src="@drawable/ic_img_password"
@@ -124,10 +124,10 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/btnLogin"
                     android:layout_below="@+id/relative2"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="20dp"
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="30dp"
-                    android:layout_marginBottom="40dp"
+                    android:layout_marginBottom="20dp"
                     android:background="@drawable/ic_btn_rounded1"
                     android:textColor="@android:color/white"/>
         </RelativeLayout>

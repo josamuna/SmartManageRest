@@ -1,6 +1,8 @@
 package com.josamuna.smartmanagerest.fragment
 
 
+import android.content.ClipboardManager
+import android.content.Context.CLIPBOARD_SERVICE
 import android.database.sqlite.SQLiteException
 import android.database.sqlite.SQLiteTableLockedException
 import android.os.Bundle
@@ -56,6 +58,9 @@ class FragmentListSavedQrCode : Fragment(), ISharedFragment {
 
         //Get the current FragmentManager
         Factory.FRAGMENTMANAGER = fragmentManager
+
+        //Get the current ClipboadManager that enable to copy some text in the clipboard
+        Factory.CLIPBOARDMANAGER = activity!!.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
 
         btn_add_qrcode.setOnClickListener {
             val fragment = FragmentCaptureMain()

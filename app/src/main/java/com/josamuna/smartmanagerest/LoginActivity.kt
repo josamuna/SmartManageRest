@@ -1,12 +1,8 @@
 package com.josamuna.smartmanagerest
 
-import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
-import android.widget.Toast
 import com.josamuna.smartmanagerest.classes.ApplicationPreferences
 import com.josamuna.smartmanagerest.classes.ConnectionClass
 import com.josamuna.smartmanagerest.classes.Factory
@@ -17,7 +13,7 @@ import java.sql.Connection
 import java.sql.SQLException
 import kotlin.system.exitProcess
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity(){
 
     private var user = ""
     private var password = ""
@@ -53,8 +49,6 @@ class LoginActivity : AppCompatActivity() {
                 } catch (e: SQLException) {
                     Factory.makeLogMessage("Error Connection", "Unable to connect to Database,\nCheck username and password ${e.message}", LogType.Error)
                     Factory.makeToastMessage(applicationContext,"Unable to connect to Database,\nCheck username and password", ToastType.Long)
-//                buildDialog(context, "Connection to Database",
-//                    "Enable to open connection to Database,\n " + e.message)
                 } catch (e: ClassNotFoundException) {
                     Factory.makeLogMessage("Error Connection", "Unable to connect to Database,\nDriver not found ${e.message}", LogType.Error)
                     Factory.makeToastMessage(applicationContext,"Unable to connect to Database,\nDriver not found", ToastType.Long)
@@ -75,18 +69,6 @@ class LoginActivity : AppCompatActivity() {
             ApplicationPreferences.preferences.getString("server_pref", null).isNullOrEmpty())
             return false
         return true
-    }
-
-    private var positiveButtonClic = { _: DialogInterface, _: Int ->
-        Toast.makeText(applicationContext, android.R.string.yes, Toast.LENGTH_SHORT).show()
-    }
-
-    private var negativeButtonClic = { _: DialogInterface, _: Int ->
-        Toast.makeText(applicationContext, android.R.string.no, Toast.LENGTH_SHORT).show()
-    }
-
-    private var neutralButtonClic = { _: DialogInterface, _: Int ->
-        Toast.makeText(applicationContext, "No action", Toast.LENGTH_SHORT).show()
     }
 
     /**
@@ -145,19 +127,5 @@ class LoginActivity : AppCompatActivity() {
             isConnect = true
 
         return isConnect
-    }
-
-    private fun buildDialog(context: Context, title: String, message: String){
-        val builder = AlertDialog.Builder(context)
-        builder.setTitle(title)
-        builder.setMessage(message)
-        builder.setPositiveButton("Ok",DialogInterface.OnClickListener(function = positiveButtonClic))
-        builder.setNegativeButton(android.R.string.no, negativeButtonClic)
-        builder.setNeutralButton("No action", neutralButtonClic)
-        builder.show()
-    }
-
-    override fun onStop() {
-        super.onStop()
     }
 }
