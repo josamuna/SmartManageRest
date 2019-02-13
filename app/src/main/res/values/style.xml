@@ -8,7 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="actionOverflowMenuStyle">@style/OverflowMenuStyle</item>
 
-        <!--<item name="popupMenuStyle">@style/CustomContextMenu</item>-->
+        <item name="android:popupMenuStyle">@style/CustomContextMenu</item>
     </style>
 
     <!--Style for popup menu in Toolbar-->
@@ -29,7 +29,7 @@
     <style name="CustomToolbarTitleTheme" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
         <item name="android:textSize">17sp</item>
         <item name="android:textColor">@color/color_white</item>
-        <item name="android:fontFamily">@font/mystery_quest</item>
+        <!--<item name="android:fontFamily">@font/mystery_quest</item>-->
     </style>
 
     <!--Custom subtitle Toolbar appearance-->
@@ -40,10 +40,12 @@
     </style>
 
     <!--Custom context Menu appearance-->
-    <!--<style name="CustomContextMenu" parent="ThemeOverlay.AppCompat.Dark.ActionBar">-->
-    <!--<item name="android:textColor">@color/color_green_btn</item>-->
-    <!--<item name="android:itemBackground">@color/color_white</item>-->
-    <!--</style>-->
+    <style name="CustomContextMenu" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:textColor">@color/color_white</item>
+        <item name="android:itemBackground">@color/color_background_header_main</item>
+        <item name="android:tint">@color/color_white</item>
+        <item name="actionBarDivider">@color/color_white</item>
+    </style>
 
     <!--<style name="CustomAlertDialog" parent="@android:style/Theme.Material.Dialog" tools:targetApi="lollipop">-->
     <!--<item name="android:textColor">@android:color/white</item>-->

@@ -95,6 +95,9 @@ class FragmentListSavedQrCode : Fragment(), ISharedFragment {
         })
     }
 
+    /**
+     * Allow to view QrCode
+     */
     private fun viewQrCodeSaved(){
         val lstQrCode = sqliteDB.getQrCodes(context!!)
         adapter = QrCodeListAdapter(context!!, lstQrCode)
@@ -104,6 +107,9 @@ class FragmentListSavedQrCode : Fragment(), ISharedFragment {
         customAdapter = CustomQrCodeListAdapter(context!!, lstQrCode)
     }
 
+    /**
+     * Allow to open a new Fragment from another
+     */
     override fun openFragment(fragment: Fragment, fragment_id: Int) {
         fragmentManager?.beginTransaction()?.replace(fragment_id, fragment)?.commit()
     }

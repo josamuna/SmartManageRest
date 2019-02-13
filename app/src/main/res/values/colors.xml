@@ -37,5 +37,6 @@
     <color name="color_tint_img_qrcode">#948775</color>
     <color name="color_text_feaching">#74355a</color>
     <color name="color_test">#948775</color>
+    <color name="color_text_help">#404040</color>
     <!--<color name="color_background_login">#cddae2</color> #46d34d  #9b8e7c-->
 </resources>

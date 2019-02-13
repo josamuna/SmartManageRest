@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteException
 import android.database.sqlite.SQLiteTableLockedException
 import android.support.v4.app.Fragment
 import android.support.v7.app.AlertDialog
+import android.support.v7.view.ContextThemeWrapper
 import android.support.v7.widget.PopupMenu
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -51,8 +52,17 @@ class QrCodeListAdapter(context: Context, private val qrObject: ArrayList<QrCode
         holder.hourSaved.text = data.strTime
 
         holder.itemView.setOnLongClickListener {
-            val popupMenu = PopupMenu(ctx, holder.itemView)
-            popupMenu.inflate(R.menu.option_menu_list)
+            //Use this three lines that show popup without Custom style
+//            val popupMenu = PopupMenu(ctx, holder.buttonMenuSelect)
+//            popupMenu.inflate(R.menu.option_menu_list)
+
+            //Use this five line to support popup with Custom style
+            val contextWrapper = ContextThemeWrapper(ctx, R.style.CustomContextMenu)
+            val popupMenu = PopupMenu(contextWrapper, holder.buttonMenuSelect)
+
+            Factory.setForceShowIcon(popupMenu)
+            val inflater = popupMenu.menuInflater
+            inflater.inflate(R.menu.option_menu_list, popupMenu.menu)
 
             popupMenu.setOnMenuItemClickListener{item ->
                 when(item.itemId){
@@ -97,8 +107,17 @@ class QrCodeListAdapter(context: Context, private val qrObject: ArrayList<QrCode
         }
 
         holder.buttonMenuSelect.setOnClickListener {
-            val popupMenu = PopupMenu(ctx, holder.buttonMenuSelect)
-            popupMenu.inflate(R.menu.option_menu_list)
+            //Use this three lines that show popup without Custom style
+//            val popupMenu = PopupMenu(ctx, holder.buttonMenuSelect)
+//            popupMenu.inflate(R.menu.option_menu_list)
+
+            //Use this five lines to support popup with Custom style
+            val contextWrapper = ContextThemeWrapper(ctx, R.style.CustomContextMenu)
+            val popupMenu = PopupMenu(contextWrapper, holder.buttonMenuSelect)
+
+            Factory.setForceShowIcon(popupMenu)
+            val inflater = popupMenu.menuInflater
+            inflater.inflate(R.menu.option_menu_list, popupMenu.menu)
 
             popupMenu.setOnMenuItemClickListener{item ->
                 when(item.itemId){
@@ -138,7 +157,7 @@ class QrCodeListAdapter(context: Context, private val qrObject: ArrayList<QrCode
                 false
             }
 
-            //How popup Menu
+            //Show popup Menu
             popupMenu.show()
         }
     }

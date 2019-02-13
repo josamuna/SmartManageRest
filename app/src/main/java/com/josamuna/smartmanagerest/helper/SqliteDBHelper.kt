@@ -6,21 +6,16 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import com.josamuna.smartmanagerest.classes.Factory
-import com.josamuna.smartmanagerest.enumerations.LogType
 import com.josamuna.smartmanagerest.enumerations.ToastType
 import com.josamuna.smartmanagerest.model.QrCodeData
 import com.josamuna.smartmanagerest.utils.FieldsContract
 
-class SqliteDBHelper: SQLiteOpenHelper {
+class SqliteDBHelper
+/**
+ * That constructor initialise Database with the current context
+ */(context: Context) : SQLiteOpenHelper(context, FieldsContract.database_name, null, 1) {
 
-    private var myContext: Context
-
-    /**
-     * That constructor initialise Database with the current context
-     */
-     constructor(context: Context) : super(context, FieldsContract.database_name, null, 1){
-        this.myContext = context
-    }
+//    private var myContext: Context = context
 
     override fun onCreate(db: SQLiteDatabase?) {
         db!!.execSQL(FieldsContract.create_table_qrcode)
@@ -50,28 +45,28 @@ class SqliteDBHelper: SQLiteOpenHelper {
     }
 
     /**
-     * Allow to get one record QrCode item by id passed has parameter, and the context
+     * Allow to get one record QrCode item by id passed has parameter, and the context | This methode is not yet used
      */
-    fun getQrCode(context:Context, idKey: Int): QrCodeData {
-        val data = QrCodeData()
-        val db = this@SqliteDBHelper.writableDatabase
-        val query = "select id,qrcode_text,date_saved,time_saved from ${FieldsContract.table_qrcode} where id=$idKey"
-
-        val cursor = db.rawQuery(query, null)
-
-        if(cursor.count > 0){
-            if (cursor.moveToNext()){
-                setQrCodeValue(data, cursor)
-
-                Factory.makeToastMessage(context,"${cursor.count} records found", ToastType.Long)
-            }
-        }else
-            Factory.makeToastMessage(context,"No records found !!!", ToastType.Long)
-
-        cursor.close()
-        db.close()
-        return data
-    }
+//    fun getQrCode(context:Context, idKey: Int): QrCodeData {
+//        val data = QrCodeData()
+//        val db = this@SqliteDBHelper.writableDatabase
+//        val query = "select id,qrcode_text,date_saved,time_saved from ${FieldsContract.table_qrcode} where id=$idKey"
+//
+//        val cursor = db.rawQuery(query, null)
+//
+//        if(cursor.count > 0){
+//            if (cursor.moveToNext()){
+//                setQrCodeValue(data, cursor)
+//
+//                Factory.makeToastMessage(context,"${cursor.count} records found", ToastType.Long)
+//            }
+//        }else
+//            Factory.makeToastMessage(context,"No records found !!!", ToastType.Long)
+//
+//        cursor.close()
+//        db.close()
+//        return data
+//    }
 
     /**
      * Factorisation function for multiple use
@@ -112,15 +107,18 @@ class SqliteDBHelper: SQLiteOpenHelper {
     }
 
     fun deleteQrCode(idKey: Int): Int{
-        var recordDeleted: Int = 0
+        val recordDeleted: Int
         val db = this@SqliteDBHelper.writableDatabase
         recordDeleted = db.delete(FieldsContract.table_qrcode, "id=$idKey", null)
         db.close()
         return recordDeleted
     }
 
+    /**
+     * Allow to delete all records into SQLite Database
+     */
     fun deleteAllQrCode(): Int{
-        var recordDeleted: Int = 0
+        val recordDeleted: Int
         val db = this@SqliteDBHelper.writableDatabase
         recordDeleted = db.delete(FieldsContract.table_qrcode, "1=1", null)
         db.close()

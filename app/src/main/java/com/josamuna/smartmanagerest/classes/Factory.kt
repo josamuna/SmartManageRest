@@ -5,6 +5,7 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.os.StrictMode
 import android.support.v4.app.FragmentManager
+import android.support.v7.widget.PopupMenu
 import android.util.Log
 import android.widget.Toast
 import com.josamuna.smartmanagerest.enumerations.FragmentTagValue
@@ -65,6 +66,24 @@ object Factory {
             LogType.Information -> Log.i(tag, strMessage)
             LogType.Debug -> Log.d(tag, strMessage)
             LogType.Error -> Log.e(tag, strMessage)
+        }
+    }
+
+    /**
+     * Allow to force popupMenu to get the Custom image
+     */
+    fun setForceShowIcon(popupMenu: PopupMenu) {
+        val myFields = popupMenu.javaClass.declaredFields
+        for (field in myFields) {
+            if ("mPopup" == field.name) {
+                field.isAccessible = true
+
+                val menuPopupHelper = field.get(popupMenu)
+                val popupHelper = Class.forName(menuPopupHelper.javaClass.name)
+                val mMethods = popupHelper.getMethod("setForceShowIcon", Boolean::class.javaPrimitiveType)
+                mMethods.invoke(menuPopupHelper, true)
+                break
+            }
         }
     }
 
