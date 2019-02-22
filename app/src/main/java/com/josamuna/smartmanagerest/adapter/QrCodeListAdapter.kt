@@ -11,8 +11,10 @@ import android.support.v7.view.ContextThemeWrapper
 import android.support.v7.widget.PopupMenu
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
+import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import com.josamuna.smartmanagerest.R
 import com.josamuna.smartmanagerest.classes.Factory
 import com.josamuna.smartmanagerest.classes.Factory.FRAGMENTMANAGER
@@ -27,12 +29,12 @@ import kotlinx.android.synthetic.main.qrcode_item_row.view.*
 
 class QrCodeListAdapter(context: Context, private val qrObject: ArrayList<QrCodeData>): RecyclerView.Adapter<QrCodeListAdapter.ViewHolder>() {
 
-    private val ctx = context
+    private val ctx: Context = context
     private var idRecord: Int = 0
     private var deleteAllRecord: Boolean = false
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.qrcode_item_row, parent, false)
+        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.qrcode_item_row, parent, false)
         return ViewHolder(view)
     }
 
@@ -61,7 +63,7 @@ class QrCodeListAdapter(context: Context, private val qrObject: ArrayList<QrCode
             val popupMenu = PopupMenu(contextWrapper, holder.buttonMenuSelect)
 
             Factory.setForceShowIcon(popupMenu)
-            val inflater = popupMenu.menuInflater
+            val inflater: MenuInflater = popupMenu.menuInflater
             inflater.inflate(R.menu.option_menu_list, popupMenu.menu)
 
             popupMenu.setOnMenuItemClickListener{item ->
@@ -116,7 +118,7 @@ class QrCodeListAdapter(context: Context, private val qrObject: ArrayList<QrCode
             val popupMenu = PopupMenu(contextWrapper, holder.buttonMenuSelect)
 
             Factory.setForceShowIcon(popupMenu)
-            val inflater = popupMenu.menuInflater
+            val inflater: MenuInflater = popupMenu.menuInflater
             inflater.inflate(R.menu.option_menu_list, popupMenu.menu)
 
             popupMenu.setOnMenuItemClickListener{item ->
@@ -166,7 +168,7 @@ class QrCodeListAdapter(context: Context, private val qrObject: ArrayList<QrCode
      * Alow to show DialogBox to show message
      */
     private fun buildDialogOkCancel(context: Context, title: String, message: String){
-        val builder = AlertDialog.Builder(context)
+        val builder: AlertDialog.Builder = AlertDialog.Builder(context)
         builder.setTitle(title)
         builder.setMessage(message)
         builder.setPositiveButton("Ok", DialogInterface.OnClickListener(positiveButtonClic))
@@ -189,7 +191,7 @@ class QrCodeListAdapter(context: Context, private val qrObject: ArrayList<QrCode
             val dbHel = SqliteDBHelper(ctx)
 
             if(deleteAllRecord){
-                val record = dbHel.deleteAllQrCode()
+                val record: Int = dbHel.deleteAllQrCode()
 
 
                 if (record > 0) {
@@ -201,7 +203,7 @@ class QrCodeListAdapter(context: Context, private val qrObject: ArrayList<QrCode
                     Factory.makeToastMessage(ctx, "No deletion performed !!!", ToastType.Long)
                 }
             }else {
-                val record = dbHel.deleteQrCode(idRecord)
+                val record: Int = dbHel.deleteQrCode(idRecord)
 
                 if (record > 0) {
                     //After deletion reopen the same Fragment to make data up to date
@@ -237,10 +239,10 @@ class QrCodeListAdapter(context: Context, private val qrObject: ArrayList<QrCode
      * A ViewHolder class for Adapter
      */
     class ViewHolder(items: View): RecyclerView.ViewHolder(items){
-        var txtIdSaved = items.txtIdSaved!!
-        val txtQrCodeContent = items.txtQrCodeContent!!
-        val dateSaved = items.txtDateSaved!!
-        val hourSaved = items.txtTimeSaved!!
-        val buttonMenuSelect = items.txtButtonOptionMenu!!
+        var txtIdSaved: TextView = items.txtIdSaved!!
+        val txtQrCodeContent: TextView = items.txtQrCodeContent!!
+        val dateSaved: TextView = items.txtDateSaved!!
+        val hourSaved: TextView = items.txtTimeSaved!!
+        val buttonMenuSelect: TextView = items.txtButtonOptionMenu!!
     }
 }

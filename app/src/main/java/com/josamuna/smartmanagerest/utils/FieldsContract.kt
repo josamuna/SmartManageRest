@@ -5,7 +5,7 @@ package com.josamuna.smartmanagerest.utils
  */
 class FieldsContract {
     companion object {
-        var database_name = "gestion_labo_local_DB"
+        var database_name: String = "gestion_labo_local_DB"
 
         /**
          * Tables declaration
@@ -20,7 +20,7 @@ class FieldsContract {
         const val field_time_saved: String = "time_saved"
 
         //Script SQL for table qrcode
-        const val create_table_qrcode = "create table $table_qrcode" +
+        const val create_table_qrcode: String = "create table $table_qrcode" +
                 "(" +
                 "$field_id integer primary key autoincrement," +
                 "$field_qrcode_text varchar(100)," +
@@ -29,6 +29,6 @@ class FieldsContract {
                 ")"
 
         //Script drop table qrcode
-        const val drop_table_qrcode = "drop table if exists $table_qrcode"
+        const val drop_table_qrcode: String = "drop table if exists $table_qrcode"
     }
 }

@@ -33,7 +33,7 @@ class SqliteDBHelper
      * Allow to save model (QrCodeData object) into SQLite DataBase
      */
     fun insertQrCode(value_model: QrCodeData){
-        val db = this@SqliteDBHelper.writableDatabase
+        val db: SQLiteDatabase = this@SqliteDBHelper.writableDatabase
         val value = ContentValues()
 
         value.put(FieldsContract.field_qrcode_text, value_model.qrcodeContent)
@@ -83,10 +83,10 @@ class SqliteDBHelper
      */
     fun getQrCodes(context: Context): ArrayList<QrCodeData>{
         val listQrCode = ArrayList<QrCodeData>()
-        val db = this@SqliteDBHelper.writableDatabase
+        val db: SQLiteDatabase = this@SqliteDBHelper.writableDatabase
         val query = "select id,qrcode_text,date_saved,time_saved from ${FieldsContract.table_qrcode}"
 
-        val cursor = db.rawQuery(query, null)
+        val cursor: Cursor = db.rawQuery(query, null)
 
         if(cursor.count > 0){
             Factory.makeToastMessage(context,"${cursor.count} records found", ToastType.Long)
@@ -108,7 +108,7 @@ class SqliteDBHelper
 
     fun deleteQrCode(idKey: Int): Int{
         val recordDeleted: Int
-        val db = this@SqliteDBHelper.writableDatabase
+        val db: SQLiteDatabase = this@SqliteDBHelper.writableDatabase
         recordDeleted = db.delete(FieldsContract.table_qrcode, "id=$idKey", null)
         db.close()
         return recordDeleted
@@ -119,7 +119,7 @@ class SqliteDBHelper
      */
     fun deleteAllQrCode(): Int{
         val recordDeleted: Int
-        val db = this@SqliteDBHelper.writableDatabase
+        val db: SQLiteDatabase = this@SqliteDBHelper.writableDatabase
         recordDeleted = db.delete(FieldsContract.table_qrcode, "1=1", null)
         db.close()
         return recordDeleted

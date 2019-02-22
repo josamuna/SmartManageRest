@@ -12,9 +12,9 @@ import com.josamuna.smartmanagerest.enumerations.FragmentTagValue
 import com.josamuna.smartmanagerest.enumerations.LogType
 import com.josamuna.smartmanagerest.enumerations.ToastType
 import com.josamuna.smartmanagerest.model.Equipment
-import java.sql.Connection
-import java.sql.DriverManager
-import java.sql.SQLException
+import java.lang.reflect.Field
+import java.lang.reflect.Method
+import java.sql.*
 
 //Declare Factory with one instance like Signleton
 object Factory {
@@ -26,7 +26,7 @@ object Factory {
     var CLIPDATA: ClipData? = null
 
     fun executeConnection(connectionClass:ConnectionClass) : Connection?{
-        val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
+        val policy: StrictMode.ThreadPolicy = StrictMode.ThreadPolicy.Builder().permitAll().build()
         StrictMode.setThreadPolicy(policy)
 
         Class.forName("net.sourceforge.jtds.jdbc.Driver")
@@ -73,14 +73,14 @@ object Factory {
      * Allow to force popupMenu to get the Custom image
      */
     fun setForceShowIcon(popupMenu: PopupMenu) {
-        val myFields = popupMenu.javaClass.declaredFields
-        for (field in myFields) {
+        val myFields: Array<Field> = popupMenu.javaClass.declaredFields
+        for (field: Field in myFields) {
             if ("mPopup" == field.name) {
                 field.isAccessible = true
 
-                val menuPopupHelper = field.get(popupMenu)
-                val popupHelper = Class.forName(menuPopupHelper.javaClass.name)
-                val mMethods = popupHelper.getMethod("setForceShowIcon", Boolean::class.javaPrimitiveType)
+                val menuPopupHelper: Any = field.get(popupMenu)
+                val popupHelper: Class<*> = Class.forName(menuPopupHelper.javaClass.name)
+                val mMethods: Method = popupHelper.getMethod("setForceShowIcon", Boolean::class.javaPrimitiveType)
                 mMethods.invoke(menuPopupHelper, true)
                 break
             }
@@ -99,7 +99,7 @@ object Factory {
         if(CONN_VALUE == null)
             throw SQLException("Make sure that you are connected to remote Database !!!")
 
-        val query = "select materiel.id as idInt,materiel.code_str as idStr,categorie_materiel.designation as categorieMateriel,date_acquisition as acquisitionDate,garantie.valeur as guaranty,marque.designation as marque,\n" +
+        val query: String = "select materiel.id as idInt,materiel.code_str as idStr,categorie_materiel.designation as categorieMateriel,date_acquisition as acquisitionDate,garantie.valeur as guaranty,marque.designation as marque,\n" +
                 "modele.designation as model,couleur.designation as couleur,poids.valeur as weight,etat_materiel.designation as etat,materiel.label as label,\n" +
                 "materiel.mac_adresse1 as macWIFI, materiel.mac_adresse2 as macLAN,type_ordinateur.designation as typeComputer,type_clavier.designation as typeKeybord,OS.designation as operatingS,ram.id as ram,processeur.valeur as processeur,\n" +
                 "nombre_coeur_processeur.valeur as processorCore,type_hdd.designation as typeHDD,nombre_hdd.valeur as nbrHDD,capacite_hdd.valeur as capacityHDD,taille_ecran.valeur as sceenSize,usb2.valeur as usb2,usb3.valeur as usb3,hdmi.valeur as hdmi,\n" +
@@ -191,9 +191,9 @@ object Factory {
                 "where  materiel.code_str=?"
 
         val con: Connection = CONN_VALUE as Connection
-        val ps = con.prepareStatement(query)
+        val ps: PreparedStatement = con.prepareStatement(query)
         ps.setString(1, stringKey)
-        val dataResult = ps.executeQuery()
+        val dataResult: ResultSet = ps.executeQuery()
 
         if (dataResult.next()){
             equipment = Equipment()

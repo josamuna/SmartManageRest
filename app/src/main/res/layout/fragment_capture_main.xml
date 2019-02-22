@@ -74,10 +74,9 @@
                             android:background="@drawable/ic_btn_rounded3"
                             android:textColor="@android:color/white"/>
 
-                    <EditText android:layout_width="match_parent"
+                    <TextView android:layout_width="match_parent"
                               android:layout_height="match_parent"
                               android:id="@+id/qrCodeCaptured"
-                              android:inputType="textMultiLine"
                               android:layout_marginTop="10dp"
                               android:layout_below="@+id/btn_capture"
                               android:layout_above="@+id/btn_save_captured"
@@ -86,12 +85,7 @@
                               android:textSize="@dimen/dim_qrcode_scaned"
                               android:hint="@string/txt_hint_qrCode_captured"
                               android:textColor="@color/color_background_header_main"
-                              tools:ignore="Autofill"
-
-                              android:clickable="false"
-                              android:cursorVisible="false"
-                              android:focusable="false"
-                              android:focusableInTouchMode="false"/>
+                              android:scrollbars="vertical"/>
 
                     <Button android:layout_width="match_parent"
                             android:layout_height="wrap_content"

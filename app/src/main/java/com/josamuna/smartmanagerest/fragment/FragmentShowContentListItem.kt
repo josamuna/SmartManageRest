@@ -31,7 +31,7 @@ class FragmentShowContentListItem : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         //Set Fragment Title
-        var supportAct = activity as AppCompatActivity
+        val supportAct: AppCompatActivity = activity as AppCompatActivity
         supportAct.supportActionBar?.title = getString(R.string.title_fragment_show_content)
 
         //Set FragmentCapture value

@@ -3,9 +3,11 @@ package com.josamuna.smartmanagerest.fragment
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
+import android.text.method.ScrollingMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import com.josamuna.smartmanagerest.R
 import com.josamuna.smartmanagerest.classes.Factory
 import com.josamuna.smartmanagerest.enumerations.FragmentTagValue
@@ -32,19 +34,16 @@ class FragmentSearch : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //Allow supporting scrolling in TextView
+        val txtDataSearchQr: TextView = view.findViewById<View>(R.id.txtDataSearchedQrcode) as TextView
+        txtDataSearchQr.movementMethod = ScrollingMovementMethod()
+
         //Set Fragment Title
-        val supportAct = activity as AppCompatActivity
+        val supportAct: AppCompatActivity = activity as AppCompatActivity
         supportAct.supportActionBar?.title = getString(R.string.title_fragment_search)
 
         //Set DefaultFragment value
         Factory.FRAGMENT_VALUE_TAG = FragmentTagValue.Search
-
-        //Use ViewModel to setvalue in EditView
-//        val model = ViewModelProviders.of(activity!!).get(Communicator::class.java)
-//        model.modelMessage.observe(activity!!, Observer { t ->
-//            if(t.toString().isNotEmpty())
-//                edtQrCodeValue.setText(t.toString())
-//        })
 
         //Set value in search text
         if (Factory.TEXT_MESSAGE.isNotEmpty())
@@ -53,8 +52,8 @@ class FragmentSearch : Fragment() {
         btn_found_item.setOnClickListener {
             //Perform fetching items from database
             try {
-                val dataAff = findFromRemoteDatabase(edtQrCodeValue.text.toString())
-                edtDataSearchedQrcode.setText(dataAff.toString())
+                val dataAff: StringBuilder = findFromRemoteDatabase(edtQrCodeValue.text.toString())
+                txtDataSearchQr.text = dataAff.toString()
             }catch (e: IllegalArgumentException){
                 Factory.makeLogMessage("Error", "Please specifie a valide key to perform search\n ${e.message}", LogType.Error)
                 Factory.makeToastMessage(context!!,"Please specifie a valide key to perform search", ToastType.Long)

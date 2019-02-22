@@ -50,7 +50,7 @@ class FragmentListSavedQrCode : Fragment(), ISharedFragment {
         sqliteDB = SqliteDBHelper(context!!)
 
         //Set Fragment Title
-        val supportAct = activity as AppCompatActivity
+        val supportAct: AppCompatActivity = activity as AppCompatActivity
         supportAct.supportActionBar?.title = getString(R.string.title_fragment_history)
 
         //Set FragmentCaptureMain value

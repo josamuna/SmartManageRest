@@ -6,6 +6,7 @@ import android.support.annotation.AnimRes
 import android.support.annotation.IdRes
 import android.support.design.widget.NavigationView
 import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentTransaction
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
@@ -148,7 +149,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     /**
-     * Safely open fragment througt Activity
+     * Safely open fragment through Activity
      */
     private fun AppCompatActivity.replaceFragmentSafely(fragment: Fragment,
                                                 tag: String,
@@ -158,7 +159,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                                                 @AnimRes exitAnimation: Int = 0,
                                                 @AnimRes popEnterAnimation: Int = 0,
                                                 @AnimRes popExitAnimation: Int = 0) {
-        val ft = supportFragmentManager
+        val ft: FragmentTransaction = supportFragmentManager
             .beginTransaction()
             .setCustomAnimations(enterAnimation, exitAnimation, popEnterAnimation, popExitAnimation)
             .replace(containerViewId, fragment, tag)

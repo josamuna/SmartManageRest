@@ -50,6 +50,16 @@
                     android:textSize="@dimen/dim_designation_message_login"
                     android:textColor="@color/color_background_header_main"/>
 
+            <ProgressBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/pgbStatus"
+                    android:layout_below="@+id/txtLabelLogin"
+                    style="?android:attr/progressBarStyle"
+                    android:layout_centerHorizontal="true"
+                    android:visibility="gone"
+                    android:clickable="false"/>
+
             <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

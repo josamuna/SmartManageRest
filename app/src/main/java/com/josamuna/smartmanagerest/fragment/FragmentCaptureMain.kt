@@ -9,9 +9,11 @@ import android.os.Build
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
+import android.text.method.ScrollingMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import com.josamuna.smartmanagerest.R
 import com.josamuna.smartmanagerest.classes.Factory
 import com.josamuna.smartmanagerest.communicator.Communicator
@@ -41,7 +43,7 @@ class FragmentCaptureMain : Fragment(), ISharedFragment {
     private var stringValue: String = "QrCode Has not been scanned !!"
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        //Get curent context
+        //Get current context
 //        ctx = container!!.context
 
         // Inflate the layout for this fragment
@@ -54,14 +56,18 @@ class FragmentCaptureMain : Fragment(), ISharedFragment {
         //Initialise SqliteDBHelper object
         sqliteDB = SqliteDBHelper(context!!)
 
+        //Allow to use scrollbar in TextView
+        val qrCapturedCode: TextView = view.findViewById<View>(R.id.qrCodeCaptured) as TextView
+        qrCapturedCode.movementMethod = ScrollingMovementMethod()
+
         //Set Fragment Title
-        val supportAct = activity as AppCompatActivity
+        val supportAct: AppCompatActivity = activity as AppCompatActivity
         supportAct.supportActionBar?.title = getString(R.string.title_fragment_capture_main)
 
         //Set FragmentCaptureMain value
         Factory.FRAGMENT_VALUE_TAG = FragmentTagValue.CaptureMain
 
-        qrCodeCaptured.setText(stringValue)
+        qrCapturedCode.text = stringValue
 
         //Perform Action when clic on capture button
         btn_capture.setOnClickListener {
@@ -69,26 +75,26 @@ class FragmentCaptureMain : Fragment(), ISharedFragment {
             openFragment(fragmentCapture, R.id.framelayout)
         }
 
-        //Using Shared Data througt ViewModel Class
-        val model = ViewModelProviders.of(activity!!).get(Communicator::class.java)
+        //Using Shared Data through ViewModel Class
+        val model: Communicator = ViewModelProviders.of(activity!!).get(Communicator::class.java)
         model.modelMessage.observe(this, Observer<Any> { t ->
             if(t.toString().isNotEmpty())
-                qrCodeCaptured.setText(t.toString())
+                qrCapturedCode.text = t.toString()
         })
 
-        //Perform Action when saving sacanned QrCode
+        //Perform Action when saving scanned QrCode
         btn_save_captured.setOnClickListener {
            //Save captured QRCode
             try {
-                if(qrCodeCaptured.text.toString().isNotEmpty()){
-                    qrcodeDataObject.qrcodeContent = qrCodeCaptured.text.toString()
+                if(qrCapturedCode.text.toString().isNotEmpty()){
+                    qrcodeDataObject.qrcodeContent = qrCapturedCode.text.toString()
 
                     //Set Date and Time using difference way according Sdk Min Version
                     if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
                         val currentDateTime = LocalDateTime.now()
 
-                        val formatterDate = DateTimeFormatter.ofPattern("dd-MM-YYYY")
-                        val formatterTime = DateTimeFormatter.ofPattern("HH:mm:ss")
+                        val formatterDate: DateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-YYYY")
+                        val formatterTime: DateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss")
 
                         qrcodeDataObject.strDate = currentDateTime.format(formatterDate)
                         qrcodeDataObject.strTime = currentDateTime.format(formatterTime)

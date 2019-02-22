@@ -3,6 +3,8 @@ package com.josamuna.smartmanagerest
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.View
+import android.widget.ProgressBar
 import com.josamuna.smartmanagerest.classes.ApplicationPreferences
 import com.josamuna.smartmanagerest.classes.ConnectionClass
 import com.josamuna.smartmanagerest.classes.Factory
@@ -15,12 +17,14 @@ import kotlin.system.exitProcess
 
 class LoginActivity : AppCompatActivity(){
 
-    private var user = ""
-    private var password = ""
+    private var user: String = ""
+    private var password: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+        val pgProgress: ProgressBar = findViewById<View>(R.id.pgbStatus) as ProgressBar
 
         //Initialise preferences to default valueA
         ApplicationPreferences.init(applicationContext, "default_pref")
@@ -30,6 +34,11 @@ class LoginActivity : AppCompatActivity(){
 
             //Handle acton on clic button Login
             btnLogin.setOnClickListener {
+
+                //Activate progressbar
+                pgProgress.visibility = View.VISIBLE
+//                pgbStatus.isIndeterminate = true
+
                 user = edtUserName.text.toString()
                 password = edtPassword.text.toString()
 
@@ -42,19 +51,27 @@ class LoginActivity : AppCompatActivity(){
                 //Execute connexion to DataBase
                 try {
                     if (callConnection(connect)) {
+                        //When connection to Database success, disable progressbar after open Activity
+                        pgProgress.visibility = View.GONE
+
                         //Open Main Activity
                         val intent = Intent(applicationContext, MainActivity::class.java)
                         startActivity(intent)
+                    }else{
+                        pgProgress.visibility = View.GONE
                     }
                 } catch (e: SQLException) {
                     Factory.makeLogMessage("Error Connection", "Unable to connect to Database,\nCheck username and password ${e.message}", LogType.Error)
                     Factory.makeToastMessage(applicationContext,"Unable to connect to Database,\nCheck username and password", ToastType.Long)
+                    pgProgress.visibility = View.GONE
                 } catch (e: ClassNotFoundException) {
                     Factory.makeLogMessage("Error Connection", "Unable to connect to Database,\nDriver not found ${e.message}", LogType.Error)
                     Factory.makeToastMessage(applicationContext,"Unable to connect to Database,\nDriver not found", ToastType.Long)
+                    pgProgress.visibility = View.GONE
                 } catch (e: Exception) {
                     Factory.makeLogMessage("Error", "Unable to connect to Database,\n ${e.message}", LogType.Error)
                     Factory.makeToastMessage(applicationContext,"Unable to connect to Database,\n ${e.message}", ToastType.Long)
+                    pgProgress.visibility = View.GONE
                 }
             }
         }else{

@@ -4,9 +4,11 @@ package com.josamuna.smartmanagerest.fragment
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
+import android.text.method.ScrollingMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import com.josamuna.smartmanagerest.R
 import com.josamuna.smartmanagerest.classes.Factory
 import com.josamuna.smartmanagerest.enumerations.FragmentTagValue
@@ -28,8 +30,12 @@ class FragmentHelp : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //Allow TextView to support scrolling or scrollbar
+        val txtContent: TextView = view.findViewById<View>(R.id.txtContentHelp) as TextView
+        txtContent.movementMethod = ScrollingMovementMethod()
+
         //Set Fragment Title
-        val supportAct = activity as AppCompatActivity
+        val supportAct: AppCompatActivity = activity as AppCompatActivity
         supportAct.supportActionBar?.title = getString(R.string.title_fragment_help)
 
         //Set DefaultFragment value

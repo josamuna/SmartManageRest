@@ -33,6 +33,7 @@
                 android:layout_height="match_parent"
                 android:id="@+id/rvListQrCode"
                 android:layout_below="@+id/searchListQrCode"
+                android:paddingTop="7dp"
                 android:paddingStart="10dp"
                 android:paddingEnd="10dp"
                 android:paddingBottom="10dp">

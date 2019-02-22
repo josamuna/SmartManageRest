@@ -2,6 +2,16 @@
 <resources>
     <array name="preloaded_fonts" translatable="false">
         <item>@font/amita_bold</item>
+        <item>@font/andada</item>
+        <item>@font/antic_slab</item>
+        <item>@font/archivo_narrow</item>
+        <item>@font/baloo_chettan</item>
+        <item>@font/cousine</item>
+        <item>@font/lemon</item>
         <item>@font/mystery_quest</item>
+        <item>@font/quantico</item>
+        <item>@font/roboto</item>
+        <item>@font/salsa</item>
+        <item>@font/ubuntu</item>
     </array>
 </resources>

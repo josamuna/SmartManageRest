@@ -2,6 +2,7 @@ package com.josamuna.smartmanagerest.adapter
 
 import android.app.Activity
 import android.content.Context
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
@@ -9,23 +10,24 @@ import android.widget.TextView
 import com.josamuna.smartmanagerest.R
 import com.josamuna.smartmanagerest.model.QrCodeData
 import java.util.*
+import kotlin.collections.ArrayList
 
 class CustomQrCodeListAdapter(context: Context, qrObject: ArrayList<QrCodeData>): BaseAdapter() {
 
     //Local variables
-    private var ctx = context
-    private var codeQr = qrObject
+    private var ctx: Context = context
+    private var codeQr: ArrayList<QrCodeData> = qrObject
 
     //Store array in temp Array to be use later
-    private var tempArrayQr = ArrayList(codeQr)
+    private var tempArrayQr: ArrayList<QrCodeData> = ArrayList(codeQr)
 
     override fun getView(position: Int, view: View?, parent: ViewGroup?): View {
-        var myview = view
+        var myview : View? = view
         val holder: ViewHolder
 
         if(view == null){
-            val myInflater = (ctx as Activity).layoutInflater
-            myview = myInflater!!.inflate(R.layout.qrcode_item_row, parent, false)
+            val myInflater: LayoutInflater = (ctx as Activity).layoutInflater
+            myview = myInflater.inflate(R.layout.qrcode_item_row, parent, false)
 
             holder = ViewHolder()
 
@@ -39,7 +41,7 @@ class CustomQrCodeListAdapter(context: Context, qrObject: ArrayList<QrCodeData>)
             holder = myview!!.tag as ViewHolder
         }
 
-        val dataPosition = codeQr[position]
+        val dataPosition: QrCodeData = codeQr[position]
         holder.txtId!!.text = dataPosition.intId.toString()
         holder.txtQr!!.text = dataPosition.qrcodeContent
         holder.txtDate!!.text = dataPosition.strDate
@@ -78,7 +80,7 @@ class CustomQrCodeListAdapter(context: Context, qrObject: ArrayList<QrCodeData>)
         if(text.isEmpty()){
             codeQr.addAll(tempArrayQr)
         }else{
-            for (i in 0 until tempArrayQr.size){
+            for (i: Int in 0 until tempArrayQr.size){
                 if(tempArrayQr[i].qrcodeContent.toLowerCase(Locale.getDefault()).contains(text)){
                     codeQr.add(tempArrayQr[i])
                 }

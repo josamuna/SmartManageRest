@@ -65,17 +65,17 @@
         d’acquérir les notions essentielles en lien avec la défense des droits sociaux garantis aux personnes
         vulnérables en RDC : veuves, handicapées, enfants, etc.
     </string>
-    <string name="str_content_help"><b>SmartManageRest</b> is very easy to use, do these steps : \n
+    <string name="str_content_help"><b>SmartManageRest</b> is very easy to use, follow these steps : \n\n
         <font color="#2259e1"><b>1.<u>Make connection to Database</u> :</b></font> \n\n
         Before you use this application, you must have a valid credential to allow you to be connect to the remote SQL Server Database. This is made by put them
         in the login UI, after you are specified the valid <em>Database name</em> and <em>Server name (or IP Address)</em> and has saved them.\n\n
         <font color="#2259e1"><b>2.<u>Use main menu to navigate through application</u> :</b></font>\n\n
         After successfully connection to Database, the main menu appear with five sub menus:\n
-        <b><i>a.Sub menu Capture</i></b>    : Allow you to capture a QrCode and after that, you must saved it in your phone for next use (For that, simple click to save button).\n
-        <b><i>b.Sub menu Search</i></b>     : Allow to perform any search according QrCode you have been save precedly. this search is made from the remote SQL Server Database, which you have been connected.\n
-        <b><i>c.Sub menu History</i></b>    : After saving some QrCode, you can retrieve them in history, that help you to make search, to view at another ui, to copy it into clipboard or make
+        <b><i>A.Sub menu Capture</i></b>    : Allow you to capture a QrCode and after that, you must saved it in your phone for next use (For that, simple click to save button).\n
+        <b><i>B.Sub menu Search</i></b>     : Allow to perform any search according QrCode you have been save precedly. this search is made from the remote SQL Server Database, which you have been connected.\n
+        <b><i>C.Sub menu History</i></b>    : After saving some QrCode, you can retrieve them in history, that help you to make search, to view at another ui, to copy it into clipboard or make
         deletion (For one selection using on long click item or choose drop down menu) of selected item or all saved items.\n
-        <b><i>d.Sub menu About</i></b>      : To have more information on this application, go to this sub menu.\n\n
+        <b><i>D.Sub menu About</i></b>      : To have more information on this application, go to this sub menu.\n\n
         Finally, for more details and comments about application, please ask at this e-mail address : <font color="#0c8725"><b><u>josamuna2009@gmail.com</u></b></font>\n\n
 
     </string>

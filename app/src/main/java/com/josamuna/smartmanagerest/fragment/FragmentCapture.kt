@@ -25,7 +25,7 @@ import me.dm7.barcodescanner.zxing.ZXingScannerView
 
 class FragmentCapture: Fragment(), ZXingScannerView.ResultHandler, ISharedFragment {
 
-    private val myCameraRequestCode = 6515
+    private val myCameraRequestCode: Int = 6515
     //Object to ne use for SharedData between Fragment or Activity througt ViewModel Class
     private var model: Communicator? = null
 
@@ -37,7 +37,7 @@ class FragmentCapture: Fragment(), ZXingScannerView.ResultHandler, ISharedFragme
         super.onViewCreated(view, savedInstanceState)
 
         //Set Fragment Title
-        val supportAct = activity as AppCompatActivity
+        val supportAct: AppCompatActivity = activity as AppCompatActivity
         supportAct.supportActionBar?.title = getString(R.string.title_fragment_capture_qrcode)
 
         //Set FragmentCapture value

@@ -62,23 +62,21 @@
                         android:background="@drawable/ic_btn_rounded4"
                         android:autofillHints=""/>
 
-                <EditText
+                <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:id="@+id/edtDataSearchedQrcode"
-                        android:inputType="textMultiLine"
+                        android:id="@+id/txtDataSearchedQrcode"
                         android:hint="@string/hint_result_qrcode_search"
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"
                         android:layout_below="@+id/edtQrCodeValue"
                         android:layout_above="@+id/btn_found_item"
                         android:gravity="center_vertical|start"
-
-                        android:clickable="false"
-                        android:cursorVisible="false"
-                        android:focusable="false"
-                        android:focusableInTouchMode="false" android:autofillHints="">
-                </EditText>
+                        android:textColor="@color/color_text_feaching"
+                        android:textSize="16sp"
+                        android:fontFamily="monospace"
+                        android:scrollbars="vertical">
+                </TextView>
 
                 <Button
                         android:layout_width="match_parent"
