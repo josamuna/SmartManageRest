@@ -1,5 +1,11 @@
 package com.josamuna.smartmanagerest.model
 
+/**
+ * Equipment Model Class
+ *
+ *  @author Isamuna Nkembo Josue alias Josamuna
+ *  @since Feb 2019
+ */
 class Equipment {
     var idInt: Int = 0
     var idStr: String = ""

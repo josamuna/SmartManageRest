@@ -27,7 +27,14 @@ import com.josamuna.smartmanagerest.helper.SqliteDBHelper
 import com.josamuna.smartmanagerest.model.QrCodeData
 import kotlinx.android.synthetic.main.qrcode_item_row.view.*
 
-class QrCodeListAdapter(context: Context, private val qrObject: ArrayList<QrCodeData>): RecyclerView.Adapter<QrCodeListAdapter.ViewHolder>() {
+/**
+ * Custom class Adapter for manipulate SQLite Database
+ *
+ *  @author Isamuna Nkembo Josue alias Josamuna
+ *  @since Feb 2019
+ */
+class QrCodeListAdapter(context: Context, private val qrObject: ArrayList<QrCodeData>) :
+    RecyclerView.Adapter<QrCodeListAdapter.ViewHolder>() {
 
     private val ctx: Context = context
     private var idRecord: Int = 0
@@ -66,16 +73,16 @@ class QrCodeListAdapter(context: Context, private val qrObject: ArrayList<QrCode
             val inflater: MenuInflater = popupMenu.menuInflater
             inflater.inflate(R.menu.option_menu_list, popupMenu.menu)
 
-            popupMenu.setOnMenuItemClickListener{item ->
-                when(item.itemId){
-                    R.id.menuView ->{
+            popupMenu.setOnMenuItemClickListener { item ->
+                when (item.itemId) {
+                    R.id.menuView -> {
                         Factory.TEXT_MESSAGE = data.qrcodeContent
 
                         val fragment = FragmentShowContentListItem()
 
                         FRAGMENTMANAGER?.beginTransaction()?.replace(R.id.framelayout, fragment)?.commit()
                     }
-                    R.id.menuSearch ->{
+                    R.id.menuSearch -> {
                         //Here we must open a new fragment (Fragment Search and set Text value that allow to make search)
                         Factory.TEXT_MESSAGE = data.qrcodeContent
 
@@ -83,19 +90,19 @@ class QrCodeListAdapter(context: Context, private val qrObject: ArrayList<QrCode
 
                         FRAGMENTMANAGER?.beginTransaction()?.replace(R.id.framelayout, fragment)?.commit()
                     }
-                    R.id.menuCopy ->{
+                    R.id.menuCopy -> {
                         Factory.CLIPDATA = ClipData.newPlainText("Texte", data.qrcodeContent)
                         Factory.CLIPBOARDMANAGER?.primaryClip = Factory.CLIPDATA
-                        Factory.makeToastMessage(ctx, "Text copied", ToastType.Long)
+                        Factory.makeToastMessage(ctx, "Text copied", ToastType.LONG)
                     }
-                    R.id.menuDelete ->{
+                    R.id.menuDelete -> {
                         //Get id Selected
                         idRecord = data.intId
                         deleteAllRecord = false
                         //Use Dialog to ask question for confirmation deletion
                         buildDialogOkCancel(ctx, "Delete item", "Do you want to delete this item ?")
                     }
-                    R.id.menuDeleteAll ->{
+                    R.id.menuDeleteAll -> {
                         deleteAllRecord = true
                         //Use Dialog to ask question for confirmation deletion
                         buildDialogOkCancel(ctx, "Delete items", "Do you want to delete  all saved items ?")
@@ -121,16 +128,16 @@ class QrCodeListAdapter(context: Context, private val qrObject: ArrayList<QrCode
             val inflater: MenuInflater = popupMenu.menuInflater
             inflater.inflate(R.menu.option_menu_list, popupMenu.menu)
 
-            popupMenu.setOnMenuItemClickListener{item ->
-                when(item.itemId){
-                    R.id.menuView ->{
+            popupMenu.setOnMenuItemClickListener { item ->
+                when (item.itemId) {
+                    R.id.menuView -> {
                         Factory.TEXT_MESSAGE = data.qrcodeContent
 
                         val fragment = FragmentShowContentListItem()
 
                         FRAGMENTMANAGER?.beginTransaction()?.replace(R.id.framelayout, fragment)?.commit()
                     }
-                    R.id.menuSearch ->{
+                    R.id.menuSearch -> {
                         //Here we must open a new fragment (Fragment Search and set Text value that allow to make search)
                         Factory.TEXT_MESSAGE = data.qrcodeContent
 
@@ -138,19 +145,19 @@ class QrCodeListAdapter(context: Context, private val qrObject: ArrayList<QrCode
 
                         FRAGMENTMANAGER?.beginTransaction()?.replace(R.id.framelayout, fragment)?.commit()
                     }
-                    R.id.menuCopy ->{
+                    R.id.menuCopy -> {
                         Factory.CLIPDATA = ClipData.newPlainText("Texte", data.qrcodeContent)
                         Factory.CLIPBOARDMANAGER?.primaryClip = Factory.CLIPDATA
-                        Factory.makeToastMessage(ctx, "Text copied", ToastType.Long)
+                        Factory.makeToastMessage(ctx, "Text copied", ToastType.LONG)
                     }
-                    R.id.menuDelete ->{
+                    R.id.menuDelete -> {
                         //Get id Selected
                         idRecord = data.intId
                         deleteAllRecord = false
                         //Use Dialog to ask question for confirmation deletion
                         buildDialogOkCancel(ctx, "Delete item", "Do you want to delete this item ?")
                     }
-                    R.id.menuDeleteAll ->{
+                    R.id.menuDeleteAll -> {
                         deleteAllRecord = true
                         //Use Dialog to ask question for confirmation deletion
                         buildDialogOkCancel(ctx, "Delete items", "Do you want to delete  all saved items ?")
@@ -165,9 +172,9 @@ class QrCodeListAdapter(context: Context, private val qrObject: ArrayList<QrCode
     }
 
     /**
-     * Alow to show DialogBox to show message
+     * Allow to show DialogBox to show message
      */
-    private fun buildDialogOkCancel(context: Context, title: String, message: String){
+    private fun buildDialogOkCancel(context: Context, title: String, message: String) {
         val builder: AlertDialog.Builder = AlertDialog.Builder(context)
         builder.setTitle(title)
         builder.setMessage(message)
@@ -181,7 +188,7 @@ class QrCodeListAdapter(context: Context, private val qrObject: ArrayList<QrCode
     /**
      * Allow to open a new Fragment
      */
-    private fun openFragment(idFragment: Int, fragment: Fragment){
+    private fun openFragment(idFragment: Int, fragment: Fragment) {
         Factory.FRAGMENTMANAGER?.beginTransaction()?.replace(idFragment, fragment)?.commit()
     }
 
@@ -190,7 +197,7 @@ class QrCodeListAdapter(context: Context, private val qrObject: ArrayList<QrCode
         try {
             val dbHel = SqliteDBHelper(ctx)
 
-            if(deleteAllRecord){
+            if (deleteAllRecord) {
                 val record: Int = dbHel.deleteAllQrCode()
 
 
@@ -200,9 +207,9 @@ class QrCodeListAdapter(context: Context, private val qrObject: ArrayList<QrCode
                     val fragment = FragmentListSavedQrCode()
                     openFragment(R.id.framelayout, fragment)
                 } else {
-                    Factory.makeToastMessage(ctx, "No deletion performed !!!", ToastType.Long)
+                    Factory.makeToastMessage(ctx, "No deletion performed !!!", ToastType.LONG)
                 }
-            }else {
+            } else {
                 val record: Int = dbHel.deleteQrCode(idRecord)
 
                 if (record > 0) {
@@ -211,24 +218,28 @@ class QrCodeListAdapter(context: Context, private val qrObject: ArrayList<QrCode
                     val fragment = FragmentListSavedQrCode()
                     openFragment(R.id.framelayout, fragment)
                 } else {
-                    Factory.makeToastMessage(ctx, "No deletion performed !!!", ToastType.Long)
+                    Factory.makeToastMessage(ctx, "No deletion performed !!!", ToastType.LONG)
                 }
             }
-        }catch (e: SQLiteTableLockedException){
-            Factory.makeLogMessage("Error", "Unable to delete QrCode, table is locked\n ${e.message}", LogType.Error)
-            Factory.makeToastMessage(ctx,"Unable to delete QrCode, table is locked", ToastType.Long )
-        }catch (e: SQLiteException){
-            Factory.makeLogMessage("Error", "Unable to delete QrCode, Database is not ready\n ${e.message}", LogType.Error)
-            Factory.makeToastMessage(ctx,"Unable to delete QrCode, Database is not ready", ToastType.Long)
-        }catch (e:Exception){
-            Factory.makeLogMessage("Error", "Unable to delete QrCode\n ${e.message}", LogType.Error)
-            Factory.makeToastMessage(ctx,"Unable to delete QrCode", ToastType.Long )
+        } catch (e: SQLiteTableLockedException) {
+            Factory.makeLogMessage("Error", "Unable to delete QrCode, table is locked\n ${e.message}", LogType.ERROR)
+            Factory.makeToastMessage(ctx, "Unable to delete QrCode, table is locked", ToastType.LONG)
+        } catch (e: SQLiteException) {
+            Factory.makeLogMessage(
+                "Error",
+                "Unable to delete QrCode, Database is not ready\n ${e.message}",
+                LogType.ERROR
+            )
+            Factory.makeToastMessage(ctx, "Unable to delete QrCode, Database is not ready", ToastType.LONG)
+        } catch (e: Exception) {
+            Factory.makeLogMessage("Error", "Unable to delete QrCode\n ${e.message}", LogType.ERROR)
+            Factory.makeToastMessage(ctx, "Unable to delete QrCode", ToastType.LONG)
         }
 //        Factory.makeToastMessage(ctx, android.R.string.yes.toString(), ToastType.Long)
     }
 
     private val negativeButtonClic = { _: DialogInterface, _: Int ->
-        Factory.makeToastMessage(ctx, "Canceled action", ToastType.Long)
+        Factory.makeToastMessage(ctx, "Canceled action", ToastType.LONG)
     }
 
 //    private val neutralButtonClic = { _: DialogInterface, _: Int ->
@@ -238,7 +249,7 @@ class QrCodeListAdapter(context: Context, private val qrObject: ArrayList<QrCode
     /**
      * A ViewHolder class for Adapter
      */
-    class ViewHolder(items: View): RecyclerView.ViewHolder(items){
+    class ViewHolder(items: View) : RecyclerView.ViewHolder(items) {
         var txtIdSaved: TextView = items.txtIdSaved!!
         val txtQrCodeContent: TextView = items.txtQrCodeContent!!
         val dateSaved: TextView = items.txtDateSaved!!

@@ -18,6 +18,12 @@ import com.josamuna.smartmanagerest.fragment.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
+/**
+ * Activity Main used to give use full acces to all others application views
+ *
+ *  @author Isamuna Nkembo Josue alias Josamuna
+ *  @since Feb 2019
+ */
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,15 +51,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
         } else {
-            when(Factory.FRAGMENT_VALUE_TAG){
+            when (Factory.FRAGMENT_VALUE_TAG) {
                 //If the main fragment is open, back to Login Activity
-                FragmentTagValue.Default ->{
+                FragmentTagValue.DEFAULT -> {
                     val intent = Intent(applicationContext, LoginActivity::class.java)
                     startActivity(intent)
                 }
-                    //super.onBackPressed()
-                FragmentTagValue.CaptureMain,FragmentTagValue.Capture, FragmentTagValue.About, FragmentTagValue.Help,
-                FragmentTagValue.ListQrCode -> {
+                //super.onBackPressed()
+                FragmentTagValue.CAPTURE_MAIN, FragmentTagValue.CAPTURE, FragmentTagValue.ABOUT, FragmentTagValue.HELP,
+                FragmentTagValue.LIST_QRCODE -> {
                     replaceFragmentSafely(
                         fragment = DefaultFragment(),
                         tag = "DEFAULT_FRAGMENT",
@@ -62,7 +68,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     )
                 }
 
-                FragmentTagValue.Search, FragmentTagValue.ViewContentSelected ->{
+                FragmentTagValue.SEARCH, FragmentTagValue.VIEW_CONTENT_SELECTED -> {
                     replaceFragmentSafely(
                         fragment = FragmentListSavedQrCode(),
                         tag = "FRAGMENT_LIST_SAVED_QRCODE",
@@ -151,14 +157,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     /**
      * Safely open fragment through Activity
      */
-    private fun AppCompatActivity.replaceFragmentSafely(fragment: Fragment,
-                                                tag: String,
-                                                allowStateLoss: Boolean = false,
-                                                @IdRes containerViewId: Int,
-                                                @AnimRes enterAnimation: Int = 0,
-                                                @AnimRes exitAnimation: Int = 0,
-                                                @AnimRes popEnterAnimation: Int = 0,
-                                                @AnimRes popExitAnimation: Int = 0) {
+    private fun AppCompatActivity.replaceFragmentSafely(
+        fragment: Fragment,
+        tag: String,
+        allowStateLoss: Boolean = false,
+        @IdRes containerViewId: Int,
+        @AnimRes enterAnimation: Int = 0,
+        @AnimRes exitAnimation: Int = 0,
+        @AnimRes popEnterAnimation: Int = 0,
+        @AnimRes popExitAnimation: Int = 0
+    ) {
         val ft: FragmentTransaction = supportFragmentManager
             .beginTransaction()
             .setCustomAnimations(enterAnimation, exitAnimation, popEnterAnimation, popExitAnimation)

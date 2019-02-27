@@ -1,3 +1,9 @@
+/**
+ * Template SQL Query to fetch data from remote Database
+ *
+ *  @author Isamuna Nkembo Josue alias Josamuna
+ *  @since Feb 2019
+ */
 select materiel.id as idInt,materiel.code_str as idStr,categorie_materiel.designation as categorieMateriel,date_acquisition as acquisitionDate,garantie.valeur as guaranty,marque.designation as marque,
 modele.designation as model,couleur.designation as couleur,poids.valeur as weight,etat_materiel.designation as etat,materiel.label as label,
 materiel.mac_adresse1 as macWIFI, materiel.mac_adresse2 as macLAN,type_ordinateur.designation as typeComputer,type_clavier.designation as typeKeybord,OS.designation as operatingS,ram.id as ram,processeur.valeur as processeur,

@@ -1,7 +1,10 @@
 package com.josamuna.smartmanagerest.utils
 
 /**
- * This class allow to specifiels all Database Fiels ans others elements kind off Database name
+ * FieldsContract Class that allow to specify all Database Fields and others elements kind off Database name
+ *
+ *  @author Isamuna Nkembo Josue alias Josamuna
+ *  @since Feb 2019
  */
 class FieldsContract {
     companion object {
@@ -13,7 +16,7 @@ class FieldsContract {
          */
         const val table_qrcode: String = "qrcode"
 
-        //Here we declare all fiels to be use with that table
+        //Here we declare all fields to be use with that table
         const val field_id: String = "id"
         const val field_qrcode_text: String = "qrcode_text"
         const val field_date_saved: String = "date_saved"

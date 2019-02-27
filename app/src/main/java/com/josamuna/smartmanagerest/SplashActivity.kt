@@ -5,6 +5,12 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import android.support.v7.app.AppCompatActivity
 
+/**
+ * Activity Splash when application load
+ *
+ *  @author Isamuna Nkembo Josue alias Josamuna
+ *  @since Feb 2019
+ */
 class SplashActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -12,7 +18,7 @@ class SplashActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash)
 
         //Using a CountDownTimer to wait few second after open Login Activity
-        object:CountDownTimer(8000,1000){//(8000,1000){
+        object : CountDownTimer(8000, 1000) {
             override fun onFinish() {
                 //Call LoginActivity
                 val intent = Intent(applicationContext, LoginActivity::class.java)

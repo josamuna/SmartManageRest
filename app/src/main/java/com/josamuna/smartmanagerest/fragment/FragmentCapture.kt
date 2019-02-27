@@ -23,14 +23,20 @@ import com.josamuna.smartmanagerest.interfaces.ISharedFragment
 import kotlinx.android.synthetic.main.capture_layout.*
 import me.dm7.barcodescanner.zxing.ZXingScannerView
 
-class FragmentCapture: Fragment(), ZXingScannerView.ResultHandler, ISharedFragment {
+/**
+ * Fragment for making capture using Custom QRCode Scanner
+ *
+ *  @author Isamuna Nkembo Josue alias Josamuna
+ *  @since Feb 2019
+ */
+class FragmentCapture : Fragment(), ZXingScannerView.ResultHandler, ISharedFragment {
 
     private val myCameraRequestCode: Int = 6515
     //Object to ne use for SharedData between Fragment or Activity througt ViewModel Class
     private var model: Communicator? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return LayoutInflater.from(container?.context).inflate(R.layout.capture_layout,container,false)
+        return LayoutInflater.from(container?.context).inflate(R.layout.capture_layout, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -41,7 +47,7 @@ class FragmentCapture: Fragment(), ZXingScannerView.ResultHandler, ISharedFragme
         supportAct.supportActionBar?.title = getString(R.string.title_fragment_capture_qrcode)
 
         //Set FragmentCapture value
-        Factory.FRAGMENT_VALUE_TAG = FragmentTagValue.Capture
+        Factory.FRAGMENT_VALUE_TAG = FragmentTagValue.CAPTURE
 
         //Instanciate model using with Communicator (ViewModel Class)
         model = ViewModelProviders.of(activity!!).get(Communicator::class.java)
@@ -50,13 +56,13 @@ class FragmentCapture: Fragment(), ZXingScannerView.ResultHandler, ISharedFragme
         setQrCodeScannerProperties()
     }
 
-    private fun setQrCodeScannerProperties(){
+    private fun setQrCodeScannerProperties() {
         qrCodeScanner.setFormats(listOf(BarcodeFormat.QR_CODE))
         qrCodeScanner.setAutoFocus(true)
         qrCodeScanner.setLaserColor(R.color.colorAccent)
         qrCodeScanner.setMaskColor(R.color.colorAccent)
 
-        if(Build.MANUFACTURER.equals("HUAWAEI",ignoreCase = true))
+        if (Build.MANUFACTURER.equals("HUAWAEI", ignoreCase = true))
             qrCodeScanner.setAspectTolerance(0.5f)
     }
 
@@ -67,10 +73,14 @@ class FragmentCapture: Fragment(), ZXingScannerView.ResultHandler, ISharedFragme
         super.onResume()
 
         //Set FragmentCapture value
-        Factory.FRAGMENT_VALUE_TAG = FragmentTagValue.Capture
+        Factory.FRAGMENT_VALUE_TAG = FragmentTagValue.CAPTURE
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ContextCompat.checkSelfPermission(activity!!.applicationContext, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(
+                    activity!!.applicationContext,
+                    Manifest.permission.CAMERA
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
                 this@FragmentCapture.requestPermissions(arrayOf(Manifest.permission.CAMERA), myCameraRequestCode)
                 return
             }
@@ -92,7 +102,7 @@ class FragmentCapture: Fragment(), ZXingScannerView.ResultHandler, ISharedFragme
      * Performed action after scanned QRCode and save result in Result object
      */
     override fun handleResult(result: Result?) {
-        if(result != null){
+        if (result != null) {
             //Affecte value captured by QrCode reader in model
             model!!.setMessage(result.text)
 

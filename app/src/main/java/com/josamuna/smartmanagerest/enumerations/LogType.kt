@@ -1,11 +1,19 @@
 package com.josamuna.smartmanagerest.enumerations
 
 /**
- * Allow to specifie the Log Type when Log message
+
+ */
+/**
+ * Log type Enum
+ *
+ * Allow to specify the Log Type when Log message
  * Error for Error message
- * Information for inforamtion message
+ * Information for information message
  * Debug for Debug message
+ *
+ * @author Isamuna Nkembo Josue alias Josamuna
+ * @since Feb 2019
  */
 enum class LogType {
-    Error, Information, Debug
+    ERROR, INFORMATION, DEBUG
 }

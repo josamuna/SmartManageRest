@@ -10,6 +10,12 @@ import com.josamuna.smartmanagerest.enumerations.ToastType
 import com.josamuna.smartmanagerest.model.QrCodeData
 import com.josamuna.smartmanagerest.utils.FieldsContract
 
+/**
+ * Sqlite Database Helper Class that allow to make some operation from SQLite Database
+ *
+ *  @author Isamuna Nkembo Josue alias Josamuna
+ *  @since Feb 2019
+ */
 class SqliteDBHelper
 /**
  * That constructor initialise Database with the current context
@@ -32,7 +38,7 @@ class SqliteDBHelper
     /**
      * Allow to save model (QrCodeData object) into SQLite DataBase
      */
-    fun insertQrCode(value_model: QrCodeData){
+    fun insertQrCode(value_model: QrCodeData) {
         val db: SQLiteDatabase = this@SqliteDBHelper.writableDatabase
         val value = ContentValues()
 
@@ -81,24 +87,24 @@ class SqliteDBHelper
     /**
      * Allow to return all record in table qrcode has a ArrayList
      */
-    fun getQrCodes(context: Context): ArrayList<QrCodeData>{
+    fun getQrCodes(context: Context): ArrayList<QrCodeData> {
         val listQrCode = ArrayList<QrCodeData>()
         val db: SQLiteDatabase = this@SqliteDBHelper.writableDatabase
         val query = "select id,qrcode_text,date_saved,time_saved from ${FieldsContract.table_qrcode}"
 
         val cursor: Cursor = db.rawQuery(query, null)
 
-        if(cursor.count > 0){
-            Factory.makeToastMessage(context,"${cursor.count} records found", ToastType.Long)
+        if (cursor.count > 0) {
+            Factory.makeToastMessage(context, "${cursor.count} records found", ToastType.LONG)
 
             //Fetch to find record
-            while (cursor.moveToNext()){
+            while (cursor.moveToNext()) {
                 val qrcode = QrCodeData()
                 setQrCodeValue(qrcode, cursor)
                 listQrCode.add(qrcode)
             }
-        }else
-            Factory.makeToastMessage(context,"No records found !!!", ToastType.Long)
+        } else
+            Factory.makeToastMessage(context, "No records found !!!", ToastType.LONG)
 
         cursor.close()
         db.close()
@@ -106,7 +112,7 @@ class SqliteDBHelper
         return listQrCode
     }
 
-    fun deleteQrCode(idKey: Int): Int{
+    fun deleteQrCode(idKey: Int): Int {
         val recordDeleted: Int
         val db: SQLiteDatabase = this@SqliteDBHelper.writableDatabase
         recordDeleted = db.delete(FieldsContract.table_qrcode, "id=$idKey", null)
@@ -117,7 +123,7 @@ class SqliteDBHelper
     /**
      * Allow to delete all records into SQLite Database
      */
-    fun deleteAllQrCode(): Int{
+    fun deleteAllQrCode(): Int {
         val recordDeleted: Int
         val db: SQLiteDatabase = this@SqliteDBHelper.writableDatabase
         recordDeleted = db.delete(FieldsContract.table_qrcode, "1=1", null)

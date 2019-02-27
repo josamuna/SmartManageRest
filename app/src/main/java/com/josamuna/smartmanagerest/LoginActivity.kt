@@ -2,6 +2,7 @@ package com.josamuna.smartmanagerest
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.ProgressBar
@@ -15,10 +16,13 @@ import java.sql.Connection
 import java.sql.SQLException
 import kotlin.system.exitProcess
 
-class LoginActivity : AppCompatActivity(){
-
-    private var user: String = ""
-    private var password: String = ""
+/**
+ * Activity Login for login user
+ *
+ *  @author Isamuna Nkembo Josue alias Josamuna
+ *  @since Feb 2019
+ */
+class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,64 +32,57 @@ class LoginActivity : AppCompatActivity(){
 
         //Initialise preferences to default valueA
         ApplicationPreferences.init(applicationContext, "default_pref")
+        val connect = ConnectionClass()
 
         //Verifie preferences
-        if(verifiePreferences()) {
+        if (verifiePreferences(connect)) {
 
             //Handle acton on clic button Login
             btnLogin.setOnClickListener {
+                connect.userID = edtUserName.text.toString()
+                connect.password = edtPassword.text.toString()
 
-                //Activate progressbar
                 pgProgress.visibility = View.VISIBLE
-//                pgbStatus.isIndeterminate = true
 
-                user = edtUserName.text.toString()
-                password = edtPassword.text.toString()
+                //Call connexion in a CountDownTimer with 3 Sec Timeout when user parameters are not null
+                if (connect.userID.isNotEmpty() || connect.password.isNotEmpty()) {
+                    activateField(false)
+                    object : CountDownTimer(5000, 1000) {
+                        override fun onFinish() {
+                            executeConnection(pgProgress, connect)
+                        }
 
-                val connect = ConnectionClass()
-                connect.serverName = ApplicationPreferences.preferences.getString("server_pref", null)
-                connect.database = ApplicationPreferences.preferences.getString("database_pref", null)
-                connect.userID = user
-                connect.password = password
-
-                //Execute connexion to DataBase
-                try {
-                    if (callConnection(connect)) {
-                        //When connection to Database success, disable progressbar after open Activity
-                        pgProgress.visibility = View.GONE
-
-                        //Open Main Activity
-                        val intent = Intent(applicationContext, MainActivity::class.java)
-                        startActivity(intent)
-                    }else{
-                        pgProgress.visibility = View.GONE
-                    }
-                } catch (e: SQLException) {
-                    Factory.makeLogMessage("Error Connection", "Unable to connect to Database,\nCheck username and password ${e.message}", LogType.Error)
-                    Factory.makeToastMessage(applicationContext,"Unable to connect to Database,\nCheck username and password", ToastType.Long)
-                    pgProgress.visibility = View.GONE
-                } catch (e: ClassNotFoundException) {
-                    Factory.makeLogMessage("Error Connection", "Unable to connect to Database,\nDriver not found ${e.message}", LogType.Error)
-                    Factory.makeToastMessage(applicationContext,"Unable to connect to Database,\nDriver not found", ToastType.Long)
-                    pgProgress.visibility = View.GONE
-                } catch (e: Exception) {
-                    Factory.makeLogMessage("Error", "Unable to connect to Database,\n ${e.message}", LogType.Error)
-                    Factory.makeToastMessage(applicationContext,"Unable to connect to Database,\n ${e.message}", ToastType.Long)
-                    pgProgress.visibility = View.GONE
+                        override fun onTick(p0: Long) {
+                        }
+                    }.start()
+                } else {
+                    executeConnection(pgProgress, connect)
                 }
             }
-        }else{
+        } else {
             //Open Activity Preferences
             val intent = Intent(applicationContext, DatabaseActivity::class.java)
             startActivity(intent)
         }
     }
 
-    private fun verifiePreferences(): Boolean{
-        if(ApplicationPreferences.preferences.getString("database_pref", null).isNullOrEmpty() &&
-            ApplicationPreferences.preferences.getString("server_pref", null).isNullOrEmpty())
+    //Allow to check preferences and affect these value to ConnectionClass
+    private fun verifiePreferences(connect: ConnectionClass): Boolean {
+        if (ApplicationPreferences.preferences.getString("database_pref", null).isNullOrEmpty() &&
+            ApplicationPreferences.preferences.getString("server_pref", null).isNullOrEmpty()
+        ) {
             return false
-        return true
+        } else {
+            connect.database = ApplicationPreferences.preferences.getString("server_pref", null)
+            connect.serverName = ApplicationPreferences.preferences.getString("database_pref", null)
+            return true
+        }
+    }
+
+    //Disable connection fields
+    private fun activateField(value: Boolean) {
+        edtUserName.isEnabled = value
+        edtPassword.isEnabled = value
     }
 
     /**
@@ -94,10 +91,10 @@ class LoginActivity : AppCompatActivity(){
     override fun onBackPressed() {
         try {
             Factory.closeConnection(Factory.CONN_VALUE)
-        }catch (e: IllegalArgumentException){
-            Factory.makeLogMessage("Error", "Error when close connection ${e.message}", LogType.Error)
-        }catch (e: Exception){
-            Factory.makeLogMessage("Error", "Error not managed when close connection ${e.message}", LogType.Error)
+        } catch (e: IllegalArgumentException) {
+            Factory.makeLogMessage("Error", "Error when close connection ${e.message}", LogType.ERROR)
+        } catch (e: Exception) {
+            Factory.makeLogMessage("Error", "Error not managed when close connection ${e.message}", LogType.ERROR)
         }
 
         moveTaskToBack(true)
@@ -105,7 +102,7 @@ class LoginActivity : AppCompatActivity(){
     }
 
     /**
-     * Persorm Action on resume application
+     * Perform Action on resume application
      */
     override fun onResume() {
         super.onResume()
@@ -115,29 +112,60 @@ class LoginActivity : AppCompatActivity(){
         edtUserName.isFocusable = true
     }
 
+    private fun executeConnection(pgBar: ProgressBar, connectionClass: ConnectionClass) {
+        val okConnection = false
+
+        //Execute connexion to DataBase
+        try {
+            if (callConnection(connectionClass)) {
+                if (okConnection) {
+                    //Open Main Activity
+                    val intent = Intent(applicationContext, MainActivity::class.java)
+                    startActivity(intent)
+                }
+            }
+        } catch (e: SQLException) {
+            Factory.makeLogMessage(
+                "Error Connection",
+                "Unable to connect to Database,\nCheck username and password ${e.message}",
+                LogType.ERROR
+            )
+            Factory.makeToastMessage(
+                applicationContext,
+                "Unable to connect to Database,\nCheck username and password",
+                ToastType.LONG
+            )
+        } catch (e: ClassNotFoundException) {
+            Factory.makeLogMessage(
+                "Error Connection",
+                "Unable to connect to Database,\nDriver not found ${e.message}",
+                LogType.ERROR
+            )
+            Factory.makeToastMessage(
+                applicationContext,
+                "Unable to connect to Database,\nDriver not found",
+                ToastType.LONG
+            )
+        } catch (e: Exception) {
+            Factory.makeLogMessage("Error", "Unable to connect to Database,\n ${e.message}", LogType.ERROR)
+            Factory.makeToastMessage(
+                applicationContext,
+                "Unable to connect to Database,\n ${e.message}",
+                ToastType.LONG
+            )
+        }
+
+        activateField(true)
+        pgBar.visibility = View.GONE
+    }
+
     /**
      * Execute connexion to DataBase when Connections Parameters are valides
      */
-    private fun callConnection(connectionClass : ConnectionClass) : Boolean
-    {
+    private fun callConnection(connectionClass: ConnectionClass): Boolean {
         var isConnect = false
         val connect: Connection? = Factory.executeConnection(connectionClass)
 
-//        if(Factory.CONN_VALUE != null) {
-//            Factory.CONN_VALUE?.close()
-//
-//            connect = Factory.executeConnection(connectionClass)
-//            Factory.CONN_VALUE = connect
-//
-//            if (connect != null)
-//                isConnect = true
-//        }else{
-//            connect = Factory.executeConnection(connectionClass)
-//            Factory.CONN_VALUE = connect
-//
-//            if (connect != null)
-//                isConnect = true
-//        }
         Factory.CONN_VALUE = connect
 
         if (connect != null)

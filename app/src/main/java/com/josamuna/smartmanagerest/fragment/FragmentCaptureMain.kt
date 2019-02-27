@@ -30,12 +30,14 @@ import java.time.format.DateTimeFormatter
 import java.util.*
 
 /**
- * A simple [Fragment] subclass.
+ * Main Capture Fragment allow to save that or make capture
  *
+ *  @author Isamuna Nkembo Josue alias Josamuna
+ *  @since Feb 2019
  */
 class FragmentCaptureMain : Fragment(), ISharedFragment {
 
-//    private var ctx: Context? = null
+    //    private var ctx: Context? = null
     private var sqliteDB: SqliteDBHelper? = null
     private var qrcodeDataObject = QrCodeData()
 
@@ -47,7 +49,7 @@ class FragmentCaptureMain : Fragment(), ISharedFragment {
 //        ctx = container!!.context
 
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_capture_main, container,false)
+        return inflater.inflate(R.layout.fragment_capture_main, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -65,7 +67,7 @@ class FragmentCaptureMain : Fragment(), ISharedFragment {
         supportAct.supportActionBar?.title = getString(R.string.title_fragment_capture_main)
 
         //Set FragmentCaptureMain value
-        Factory.FRAGMENT_VALUE_TAG = FragmentTagValue.CaptureMain
+        Factory.FRAGMENT_VALUE_TAG = FragmentTagValue.CAPTURE_MAIN
 
         qrCapturedCode.text = stringValue
 
@@ -78,19 +80,19 @@ class FragmentCaptureMain : Fragment(), ISharedFragment {
         //Using Shared Data through ViewModel Class
         val model: Communicator = ViewModelProviders.of(activity!!).get(Communicator::class.java)
         model.modelMessage.observe(this, Observer<Any> { t ->
-            if(t.toString().isNotEmpty())
+            if (t.toString().isNotEmpty())
                 qrCapturedCode.text = t.toString()
         })
 
         //Perform Action when saving scanned QrCode
         btn_save_captured.setOnClickListener {
-           //Save captured QRCode
+            //Save captured QRCode
             try {
-                if(qrCapturedCode.text.toString().isNotEmpty()){
+                if (qrCapturedCode.text.toString().isNotEmpty()) {
                     qrcodeDataObject.qrcodeContent = qrCapturedCode.text.toString()
 
                     //Set Date and Time using difference way according Sdk Min Version
-                    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                         val currentDateTime = LocalDateTime.now()
 
                         val formatterDate: DateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-YYYY")
@@ -99,7 +101,7 @@ class FragmentCaptureMain : Fragment(), ISharedFragment {
                         qrcodeDataObject.strDate = currentDateTime.format(formatterDate)
                         qrcodeDataObject.strTime = currentDateTime.format(formatterTime)
 
-                    }else{
+                    } else {
                         val currentDateTime = Date()
 
                         val formatterDate = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
@@ -111,21 +113,26 @@ class FragmentCaptureMain : Fragment(), ISharedFragment {
 
                     saveQRCodeCaptured()
 
-                    Factory.makeToastMessage(context!!,"QrCode Saved successfully", ToastType.Long )
+                    Factory.makeToastMessage(context!!, "QrCode Saved successfully", ToastType.LONG)
                 }
-            }catch (e: SQLiteTableLockedException){
-                Factory.makeLogMessage("Error", "Unable to save QrCode, table is locked\n ${e.message}", LogType.Error)
-                Factory.makeToastMessage(context!!,"Unable to save QrCode, table is locked", ToastType.Long )
-            }catch (e: SQLiteException){
-                Factory.makeLogMessage("Error", "Unable to save QrCode, Database is not ready\n ${e.message}", LogType.Error)
-                Factory.makeToastMessage(context!!,"Unable to save QrCode, Database is not ready", ToastType.Long )
-            }catch (e:Exception){
-                Factory.makeLogMessage("Error", "Unable to save QrCode\n ${e.message}", LogType.Error)
-                Factory.makeToastMessage(context!!,"Unable to save QrCode", ToastType.Long )
+            } catch (e: SQLiteTableLockedException) {
+                Factory.makeLogMessage("Error", "Unable to save QrCode, table is locked\n ${e.message}", LogType.ERROR)
+                Factory.makeToastMessage(context!!, "Unable to save QrCode, table is locked", ToastType.LONG)
+            } catch (e: SQLiteException) {
+                Factory.makeLogMessage(
+                    "Error",
+                    "Unable to save QrCode, Database is not ready\n ${e.message}",
+                    LogType.ERROR
+                )
+                Factory.makeToastMessage(context!!, "Unable to save QrCode, Database is not ready", ToastType.LONG)
+            } catch (e: Exception) {
+                Factory.makeLogMessage("Error", "Unable to save QrCode\n ${e.message}", LogType.ERROR)
+                Factory.makeToastMessage(context!!, "Unable to save QrCode", ToastType.LONG)
             }
         }
     }
 
+    //Allow to save scanned QRCode with QRCode Scanner
     private fun saveQRCodeCaptured() {
         sqliteDB!!.insertQrCode(qrcodeDataObject)
 //        Factory.makeLogMessage("Error", "Connection Before ${Factory.CONN_VALUE.toString()}", LogType.Error)
@@ -139,19 +146,6 @@ class FragmentCaptureMain : Fragment(), ISharedFragment {
         super.onResume()
 
         //Set FragmentCaptureMain value
-        Factory.FRAGMENT_VALUE_TAG = FragmentTagValue.CaptureMain
+        Factory.FRAGMENT_VALUE_TAG = FragmentTagValue.CAPTURE_MAIN
     }
-
-    //THESE FUNCTIONS MUST BE REMOVED
-//    fun deleteQRCodeCaptured(idKey: Int){
-//        sqliteDB!!.deleteQrCode(context!!, idKey)
-//    }
-//
-//    fun getQRCodeCaptured(idKey: Int): QrCodeData?{
-//        return sqliteDB!!.getQrCode(context!!, idKey)
-//    }
-//
-//    fun getQRCodeCaptureds(): ArrayList<QrCodeData>{
-//        return sqliteDB!!.getQrCodes(context!!)
-//    }
 }

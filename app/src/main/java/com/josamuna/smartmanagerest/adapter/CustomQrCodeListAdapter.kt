@@ -12,7 +12,13 @@ import com.josamuna.smartmanagerest.model.QrCodeData
 import java.util.*
 import kotlin.collections.ArrayList
 
-class CustomQrCodeListAdapter(context: Context, qrObject: ArrayList<QrCodeData>): BaseAdapter() {
+/**
+ * Custom class Adapter for manipulate ReclyclerView
+ *
+ *  @author Isamuna Nkembo Josue alias Josamuna
+ *  @since Feb 2019
+ */
+class CustomQrCodeListAdapter(context: Context, qrObject: ArrayList<QrCodeData>) : BaseAdapter() {
 
     //Local variables
     private var ctx: Context = context
@@ -22,10 +28,10 @@ class CustomQrCodeListAdapter(context: Context, qrObject: ArrayList<QrCodeData>)
     private var tempArrayQr: ArrayList<QrCodeData> = ArrayList(codeQr)
 
     override fun getView(position: Int, view: View?, parent: ViewGroup?): View {
-        var myview : View? = view
+        var myview: View? = view
         val holder: ViewHolder
 
-        if(view == null){
+        if (view == null) {
             val myInflater: LayoutInflater = (ctx as Activity).layoutInflater
             myview = myInflater.inflate(R.layout.qrcode_item_row, parent, false)
 
@@ -37,7 +43,7 @@ class CustomQrCodeListAdapter(context: Context, qrObject: ArrayList<QrCodeData>)
             holder.txtTime = myview.findViewById(R.id.txtTimeSaved) as TextView
 
             myview.tag = holder
-        }else{
+        } else {
             holder = myview!!.tag as ViewHolder
         }
 
@@ -50,19 +56,28 @@ class CustomQrCodeListAdapter(context: Context, qrObject: ArrayList<QrCodeData>)
         return myview!!
     }
 
+    /**
+     * Return the current item selected in ReclyclerView
+     */
     override fun getItem(position: Int): Any {
         return codeQr[position]
     }
 
+    /**
+     * Return Item Id
+     */
     override fun getItemId(p0: Int): Long {
         return 0
     }
 
+    /**
+     * Allow to return item count in RecyclerView object
+     */
     override fun getCount(): Int {
         return codeQr.size
     }
 
-    class ViewHolder{
+    class ViewHolder {
         var txtId: TextView? = null
         var txtQr: TextView? = null
         var txtDate: TextView? = null
@@ -72,16 +87,16 @@ class CustomQrCodeListAdapter(context: Context, qrObject: ArrayList<QrCodeData>)
     /**
      * Allow to perform quick search in a EditText
      */
-    fun filter(textFilter: String?){
+    fun filter(textFilter: String?) {
         val text = textFilter!!.toLowerCase()
 
         codeQr.clear()
 
-        if(text.isEmpty()){
+        if (text.isEmpty()) {
             codeQr.addAll(tempArrayQr)
-        }else{
-            for (i: Int in 0 until tempArrayQr.size){
-                if(tempArrayQr[i].qrcodeContent.toLowerCase(Locale.getDefault()).contains(text)){
+        } else {
+            for (i: Int in 0 until tempArrayQr.size) {
+                if (tempArrayQr[i].qrcodeContent.toLowerCase(Locale.getDefault()).contains(text)) {
                     codeQr.add(tempArrayQr[i])
                 }
             }

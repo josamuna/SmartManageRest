@@ -23,11 +23,14 @@ import com.josamuna.smartmanagerest.enumerations.LogType
 import com.josamuna.smartmanagerest.enumerations.ToastType
 import com.josamuna.smartmanagerest.helper.SqliteDBHelper
 import com.josamuna.smartmanagerest.interfaces.ISharedFragment
+import com.josamuna.smartmanagerest.model.QrCodeData
 import kotlinx.android.synthetic.main.fragment_list_saved_qr_code.*
 
 /**
- * A simple [Fragment] subclass.
+ * Fragment that show all saved QRCode
  *
+ *  @author Isamuna Nkembo Josue alias Josamuna
+ *  @since Feb 2019
  */
 class FragmentListSavedQrCode : Fragment(), ISharedFragment {
 
@@ -54,7 +57,7 @@ class FragmentListSavedQrCode : Fragment(), ISharedFragment {
         supportAct.supportActionBar?.title = getString(R.string.title_fragment_history)
 
         //Set FragmentCaptureMain value
-        Factory.FRAGMENT_VALUE_TAG = FragmentTagValue.ListQrCode
+        Factory.FRAGMENT_VALUE_TAG = FragmentTagValue.LIST_QRCODE
 
         //Get the current FragmentManager
         Factory.FRAGMENTMANAGER = fragmentManager
@@ -70,19 +73,27 @@ class FragmentListSavedQrCode : Fragment(), ISharedFragment {
         //Show QrCode List in RecycleView
         try {
             viewQrCodeSaved()
-        }catch (e: SQLiteTableLockedException){
-            Factory.makeLogMessage("Error", "Unable to load QrCode, table is locked\n ${e.message}", LogType.Error)
-            Factory.makeToastMessage(context!!,"Unable to load QrCode informations, table is locked", ToastType.Long )
-        }catch (e: SQLiteException){
-            Factory.makeLogMessage("Error", "Unable to load QrCode informations, Database is not ready\n ${e.message}", LogType.Error)
-            Factory.makeToastMessage(context!!,"Unable to load QrCode informations, Database is not ready", ToastType.Long )
-        }catch (e:Exception){
-            Factory.makeLogMessage("Error", "Unable to load QrCode informations\n ${e.message}", LogType.Error)
-            Factory.makeToastMessage(context!!,"Unable to load QrCode informations", ToastType.Long )
+        } catch (e: SQLiteTableLockedException) {
+            Factory.makeLogMessage("Error", "Unable to load QrCode, table is locked\n ${e.message}", LogType.ERROR)
+            Factory.makeToastMessage(context!!, "Unable to load QrCode informations, table is locked", ToastType.LONG)
+        } catch (e: SQLiteException) {
+            Factory.makeLogMessage(
+                "Error",
+                "Unable to load QrCode informations, Database is not ready\n ${e.message}",
+                LogType.ERROR
+            )
+            Factory.makeToastMessage(
+                context!!,
+                "Unable to load QrCode informations, Database is not ready",
+                ToastType.LONG
+            )
+        } catch (e: Exception) {
+            Factory.makeLogMessage("Error", "Unable to load QrCode informations\n ${e.message}", LogType.ERROR)
+            Factory.makeToastMessage(context!!, "Unable to load QrCode informations", ToastType.LONG)
         }
 
         //Perform action on change text in SearchView Control
-        searchListQrCode.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+        searchListQrCode.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(txt: String?): Boolean {
                 return false
             }
@@ -98,11 +109,14 @@ class FragmentListSavedQrCode : Fragment(), ISharedFragment {
     /**
      * Allow to view QrCode
      */
-    private fun viewQrCodeSaved(){
-        val lstQrCode = sqliteDB.getQrCodes(context!!)
+    private fun viewQrCodeSaved() {
+        val lstQrCode: ArrayList<QrCodeData> = sqliteDB.getQrCodes(context!!)
         adapter = QrCodeListAdapter(context!!, lstQrCode)
+
         rvListQrCode.layoutManager = LinearLayoutManager(context, LinearLayout.VERTICAL, false)
         rvListQrCode.adapter = adapter
+        //Allow reclyclerView to have same size for all items
+        rvListQrCode.hasFixedSize()
 
         customAdapter = CustomQrCodeListAdapter(context!!, lstQrCode)
     }
@@ -118,6 +132,6 @@ class FragmentListSavedQrCode : Fragment(), ISharedFragment {
         super.onResume()
 
         //Set FragmentCaptureMain value
-        Factory.FRAGMENT_VALUE_TAG = FragmentTagValue.ListQrCode
+        Factory.FRAGMENT_VALUE_TAG = FragmentTagValue.LIST_QRCODE
     }
 }

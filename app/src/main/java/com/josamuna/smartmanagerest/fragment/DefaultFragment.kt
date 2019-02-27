@@ -13,8 +13,10 @@ import com.josamuna.smartmanagerest.classes.Factory
 import com.josamuna.smartmanagerest.enumerations.FragmentTagValue
 
 /**
- * A simple [Fragment] subclass.
+ * Default Fragment
  *
+ *  @author Isamuna Nkembo Josue alias Josamuna
+ *  @since Feb 2019
  */
 class DefaultFragment : Fragment() {
 
@@ -34,13 +36,13 @@ class DefaultFragment : Fragment() {
         supportAct.supportActionBar?.title = getString(R.string.title_default_fragment)
 
         //Set DefaultFragment value
-        Factory.FRAGMENT_VALUE_TAG = FragmentTagValue.Default
+        Factory.FRAGMENT_VALUE_TAG = FragmentTagValue.DEFAULT
     }
 
     override fun onResume() {
         super.onResume()
 
         //Set DefaultFragment value
-        Factory.FRAGMENT_VALUE_TAG = FragmentTagValue.Default
+        Factory.FRAGMENT_VALUE_TAG = FragmentTagValue.DEFAULT
     }
 }

@@ -14,8 +14,10 @@ import com.josamuna.smartmanagerest.classes.Factory
 import com.josamuna.smartmanagerest.enumerations.FragmentTagValue
 
 /**
- * A simple [Fragment] subclass.
+ * Help Fragment that allow to have help about application use
  *
+ *  @author Isamuna Nkembo Josue alias Josamuna
+ *  @since Feb 2019
  */
 class FragmentHelp : Fragment() {
 
@@ -39,13 +41,13 @@ class FragmentHelp : Fragment() {
         supportAct.supportActionBar?.title = getString(R.string.title_fragment_help)
 
         //Set DefaultFragment value
-        Factory.FRAGMENT_VALUE_TAG = FragmentTagValue.Help
+        Factory.FRAGMENT_VALUE_TAG = FragmentTagValue.HELP
     }
 
     override fun onResume() {
         super.onResume()
 
         //Set DefaultFragment value
-        Factory.FRAGMENT_VALUE_TAG = FragmentTagValue.Help
+        Factory.FRAGMENT_VALUE_TAG = FragmentTagValue.HELP
     }
 }

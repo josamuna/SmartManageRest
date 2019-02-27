@@ -1,6 +1,7 @@
 <component name="ProjectDictionaryState">
   <dictionary name="LABOINFO">
     <words>
+      <w>backgroud</w>
       <w>cardview</w>
       <w>categorie</w>
       <w>clic</w>
@@ -11,9 +12,12 @@
       <w>feaching</w>
       <w>framelayout</w>
       <w>informations</w>
+      <w>isamuna</w>
       <w>josamuna</w>
       <w>logosmartmanage</w>
+      <w>nkembo</w>
       <w>qrcode</w>
+      <w>reclycler</w>
       <w>smartmanage</w>
       <w>smartmanagerest</w>
       <w>sqlite</w>

@@ -18,8 +18,10 @@ import kotlinx.android.synthetic.main.fragment_search.*
 import java.sql.SQLException
 
 /**
- * A simple [Fragment] subclass.
+ * Fragment that allow to search information from Database accordind QRCode early saved
  *
+ *  @author Isamuna Nkembo Josue alias Josamuna
+ *  @since Feb 2019
  */
 class FragmentSearch : Fragment() {
 
@@ -43,7 +45,7 @@ class FragmentSearch : Fragment() {
         supportAct.supportActionBar?.title = getString(R.string.title_fragment_search)
 
         //Set DefaultFragment value
-        Factory.FRAGMENT_VALUE_TAG = FragmentTagValue.Search
+        Factory.FRAGMENT_VALUE_TAG = FragmentTagValue.SEARCH
 
         //Set value in search text
         if (Factory.TEXT_MESSAGE.isNotEmpty())
@@ -54,26 +56,46 @@ class FragmentSearch : Fragment() {
             try {
                 val dataAff: StringBuilder = findFromRemoteDatabase(edtQrCodeValue.text.toString())
                 txtDataSearchQr.text = dataAff.toString()
-            }catch (e: IllegalArgumentException){
-                Factory.makeLogMessage("Error", "Please specifie a valide key to perform search\n ${e.message}", LogType.Error)
-                Factory.makeToastMessage(context!!,"Please specifie a valide key to perform search", ToastType.Long)
-            }catch (e: SQLException){
-                Factory.makeLogMessage("Error", "Unable to fetch data, be sure you are connected to remote Database\n ${e.message}", LogType.Error)
-                Factory.makeToastMessage(context!!,"Unable to fetch data, be sure you are connected to remote Database\n ${e.message}", ToastType.Long)
-            }catch (e: Exception){
-                Factory.makeLogMessage("Error", "Unable to fetch data, be sure you are connected to remote Database\n ${e.message}", LogType.Error)
-                Factory.makeToastMessage(context!!,"Unable to fetch data, be sure you are connected to remote Database\n ${e.message}", ToastType.Long)
+            } catch (e: IllegalArgumentException) {
+                Factory.makeLogMessage(
+                    "Error",
+                    "Please specifie a valide key to perform search\n ${e.message}",
+                    LogType.ERROR
+                )
+                Factory.makeToastMessage(context!!, "Please specifie a valide key to perform search", ToastType.LONG)
+            } catch (e: SQLException) {
+                Factory.makeLogMessage(
+                    "Error",
+                    "Unable to fetch data, be sure you are connected to remote Database\n ${e.message}",
+                    LogType.ERROR
+                )
+                Factory.makeToastMessage(
+                    context!!,
+                    "Unable to fetch data, be sure you are connected to remote Database\n ${e.message}",
+                    ToastType.LONG
+                )
+            } catch (e: Exception) {
+                Factory.makeLogMessage(
+                    "Error",
+                    "Unable to fetch data, be sure you are connected to remote Database\n ${e.message}",
+                    LogType.ERROR
+                )
+                Factory.makeToastMessage(
+                    context!!,
+                    "Unable to fetch data, be sure you are connected to remote Database\n ${e.message}",
+                    ToastType.LONG
+                )
             }
         }
     }
 
-    private fun findFromRemoteDatabase(stringKey: String): StringBuilder{
+    private fun findFromRemoteDatabase(stringKey: String): StringBuilder {
         //Fetch data from remote Database and display then in custom format
         val stringReturn = StringBuilder()
         stringReturn.append("No data corresponding with that search, please provide a correct key")
         val equipment: Equipment? = Factory.foundEquipement(context!!, stringKey)
 
-        if(equipment != null){
+        if (equipment != null) {
             //Clear StringBuilder
             stringReturn.clear()
 
@@ -158,6 +180,6 @@ class FragmentSearch : Fragment() {
         super.onResume()
 
         //Set DefaultFragment value
-        Factory.FRAGMENT_VALUE_TAG = FragmentTagValue.Search
+        Factory.FRAGMENT_VALUE_TAG = FragmentTagValue.SEARCH
     }
 }

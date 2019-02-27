@@ -9,6 +9,12 @@ import com.josamuna.smartmanagerest.enumerations.ToastType
 import kotlinx.android.synthetic.main.activity_database.*
 import kotlin.system.exitProcess
 
+/**
+ * Activity for saving database parameters
+ *
+ *  @author Isamuna Nkembo Josue alias Josamuna
+ *  @since Feb 2019
+ */
 class DatabaseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,12 +23,19 @@ class DatabaseActivity : AppCompatActivity() {
 
         //Save Database preferences (Server Name or IP Address and Database Name)
         btn_save_database_params.setOnClickListener {
-            if(edtDatabaseName.text.isNullOrEmpty() ||
-                    edtServerName.text.isNullOrEmpty()){
-                Factory.makeToastMessage(applicationContext,"Please set a valide Database name and Server Name (IP Address) !!!", ToastType.Long)
-            }else{
-                ApplicationPreferences.preferences.edit().putString("database_pref", edtDatabaseName.text.toString()).apply()
-                ApplicationPreferences.preferences.edit().putString("server_pref", edtServerName.text.toString()).apply()
+            if (edtDatabaseName.text.isNullOrEmpty() ||
+                edtServerName.text.isNullOrEmpty()
+            ) {
+                Factory.makeToastMessage(
+                    applicationContext,
+                    "Please set a valide Database name and Server Name (IP Address) !!!",
+                    ToastType.LONG
+                )
+            } else {
+                ApplicationPreferences.preferences.edit().putString("database_pref", edtDatabaseName.text.toString())
+                    .apply()
+                ApplicationPreferences.preferences.edit().putString("server_pref", edtServerName.text.toString())
+                    .apply()
 
                 val intent = Intent(applicationContext, LoginActivity::class.java)
                 startActivity(intent)
