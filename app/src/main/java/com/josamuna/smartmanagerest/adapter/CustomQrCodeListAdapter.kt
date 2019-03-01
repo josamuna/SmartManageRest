@@ -88,7 +88,7 @@ class CustomQrCodeListAdapter(context: Context, qrObject: ArrayList<QrCodeData>)
      * Allow to perform quick search in a EditText
      */
     fun filter(textFilter: String?) {
-        val text = textFilter!!.toLowerCase()
+        val text = textFilter!!.toString().toLowerCase()
 
         codeQr.clear()
 

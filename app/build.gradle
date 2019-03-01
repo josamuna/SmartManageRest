@@ -9,9 +9,10 @@ android {
     defaultConfig {
         applicationId "com.josamuna.smartmanagerest"
         minSdkVersion 19
+        //noinspection OldTargetApi
         targetSdkVersion 27
         versionCode 1
-        versionName "1.0"
+        versionName "1.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         //Supporting multiDex
         multiDexEnabled true
@@ -41,7 +42,6 @@ dependencies {
     implementation 'net.sourceforge.jtds:jtds:1.2.7'
     //Enable Serialization using JSON
     implementation 'com.google.code.gson:gson:2.8.5'
-    implementation 'com.android.support:recyclerview-v7:27.1.1'
     //implementation files('libs/jtds-1.2.7.jar')
     //Using for supporting ViewModelProviders
     implementation 'android.arch.lifecycle:extensions:1.1.1'
@@ -53,9 +53,9 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.1.1'
 
     //Others modules
-    implementation 'com.google.firebase:firebase-auth:16.0.1'
-    implementation 'com.google.firebase:firebase-core:16.0.1'
+    implementation 'com.google.firebase:firebase-auth:16.1.0'
+    implementation 'com.google.firebase:firebase-core:16.0.7'
 
-    implementation 'com.google.firebase:firebase-database:16.0.1'
-    implementation 'com.google.firebase:firebase-firestore:17.0.1'
+    implementation 'com.google.firebase:firebase-database:16.1.0'
+    implementation 'com.google.firebase:firebase-firestore:18.1.0'
 }

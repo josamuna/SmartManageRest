@@ -62,7 +62,7 @@ class FragmentListSavedQrCode : Fragment(), ISharedFragment {
         //Get the current FragmentManager
         Factory.FRAGMENTMANAGER = fragmentManager
 
-        //Get the current ClipboadManager that enable to copy some text in the clipboard
+        //Get the current ClipboardManager that enable to copy some text in the clipboard
         Factory.CLIPBOARDMANAGER = activity!!.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
 
         btn_add_qrcode.setOnClickListener {

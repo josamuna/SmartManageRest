@@ -47,7 +47,7 @@ class LoginActivity : AppCompatActivity() {
                 //Call connexion in a CountDownTimer with 3 Sec Timeout when user parameters are not null
                 if (connect.userID.isNotEmpty() || connect.password.isNotEmpty()) {
                     activateField(false)
-                    object : CountDownTimer(5000, 1000) {
+                    object : CountDownTimer(4000, 1000) {
                         override fun onFinish() {
                             executeConnection(pgProgress, connect)
                         }
@@ -68,15 +68,19 @@ class LoginActivity : AppCompatActivity() {
 
     //Allow to check preferences and affect these value to ConnectionClass
     private fun verifiePreferences(connect: ConnectionClass): Boolean {
+        val value: Boolean
+
         if (ApplicationPreferences.preferences.getString("database_pref", null).isNullOrEmpty() &&
             ApplicationPreferences.preferences.getString("server_pref", null).isNullOrEmpty()
         ) {
-            return false
+            value = false
         } else {
-            connect.database = ApplicationPreferences.preferences.getString("server_pref", null)
-            connect.serverName = ApplicationPreferences.preferences.getString("database_pref", null)
-            return true
+            connect.database = ApplicationPreferences.preferences.getString("database_pref", null)
+            connect.serverName = ApplicationPreferences.preferences.getString("server_pref", null)
+            value = true
         }
+
+        return value
     }
 
     //Disable connection fields
@@ -113,16 +117,12 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun executeConnection(pgBar: ProgressBar, connectionClass: ConnectionClass) {
-        val okConnection = false
-
         //Execute connexion to DataBase
         try {
             if (callConnection(connectionClass)) {
-                if (okConnection) {
-                    //Open Main Activity
-                    val intent = Intent(applicationContext, MainActivity::class.java)
-                    startActivity(intent)
-                }
+                //Open Main Activity
+                val intent = Intent(applicationContext, MainActivity::class.java)
+                startActivity(intent)
             }
         } catch (e: SQLException) {
             Factory.makeLogMessage(
